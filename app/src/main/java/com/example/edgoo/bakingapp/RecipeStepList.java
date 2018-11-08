@@ -1,40 +1,33 @@
 package com.example.edgoo.bakingapp;
 
-import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.widget.GridView;
 
 import com.example.edgoo.bakingapp.RecipeData.FetchRecipeData;
 import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
-import butterknife.BindView;
+public class RecipeStepList extends AppCompatActivity {
 
-public class MainActivity extends AppCompatActivity {
-
-    private RecipeAdapter mRecipeAdapter;
     Recipes[] mRecipes;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.mobile_recipe_step_list_layout);
+
+
+        setTitle(getIntent().getStringExtra("recipe_name"));
 
 //        THINGS NEEDED FOR ROOM AND ADAPTER
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecipeAdapter = new RecipeAdapter(mRecipes, this);
+        RecipeStepListAdapter mRecipeAdapter = new RecipeStepListAdapter(mRecipes);
         recyclerView.setAdapter(mRecipeAdapter);
 
-        loadRecipeData();
-
     }
 
-    private void loadRecipeData() {
-        new FetchRecipeData(mRecipeAdapter).execute();
-    }
 }

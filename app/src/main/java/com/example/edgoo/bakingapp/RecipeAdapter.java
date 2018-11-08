@@ -1,6 +1,7 @@
 package com.example.edgoo.bakingapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
@@ -45,9 +46,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder viewHolder, int i) {
+    public void onBindViewHolder(@NonNull RecipeAdapter.ViewHolder viewHolder, final int i) {
         viewHolder.itemName.setText(mRecipes[i].getRecipeItemName());
         viewHolder.itemServings.setText(mRecipes[i].getRecipeServings());
+
+        viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent(mContext, RecipeStepList.class);
+                intent.putExtra("recipe_name", mRecipes[i].getRecipeItemName());
+                mContext.startActivity(intent);
+            }
+        });
+
         switch (mRecipes[i].getRecipeId()) {
             case "1":
                 Picasso.with(mContext).load(R.drawable.nutellapie).into(viewHolder.recipeImage);
@@ -60,25 +72,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 break;
             case "4":
                 Picasso.with(mContext).load(R.drawable.cheesecake).into(viewHolder.recipeImage);
-                break;
         }
     }
 
-    @NonNull
-    @Override
-    public RecipeAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mobile_main_layout, viewGroup, false);
-        return new ViewHolder(view);
-    }
+        @NonNull
+        @Override
+        public RecipeAdapter.ViewHolder onCreateViewHolder (@NonNull ViewGroup viewGroup,int i){
+            View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.mobile_main_layout, viewGroup, false);
+            return new ViewHolder(view);
+        }
 
-    @Override
-    public int getItemCount() {
-        if (null == mRecipes) return 0;
-        return mRecipes.length;
-    }
+        @Override
+        public int getItemCount () {
+            if (null == mRecipes) return 0;
+            return mRecipes.length;
+        }
 
-    public void setRecipeData(Recipes[] recipeData) {
-        this.mRecipes = recipeData;
-        notifyDataSetChanged();
+        public void setRecipeData (Recipes[]recipeData){
+            this.mRecipes = recipeData;
+            notifyDataSetChanged();
+        }
     }
-}
