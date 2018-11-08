@@ -5,19 +5,21 @@ import android.os.Parcelable;
 
 public class Recipes implements Parcelable {
 
-    private String recipeItem;
+    private String recipeItemName;
     private String recipeServings;
 
     private Recipes(Parcel in) {
-        recipeItem = in.readString();
+        recipeItemName = in.readString();
         recipeServings = in.readString();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(recipeItem);
+        dest.writeString(recipeItemName);
         dest.writeString(recipeServings);
     }
+
+    Recipes(){    }
 
     @Override
     public int describeContents() {
@@ -36,12 +38,12 @@ public class Recipes implements Parcelable {
         }
     };
 
-    public String getRecipeItem() {
-        return recipeItem;
+    public String getRecipeItemName() {
+        return recipeItemName;
     }
 
-    public void setRecipeItem(String recipeItem) {
-        this.recipeItem = recipeItem;
+    public void setRecipeItemName(String recipeItemName) {
+        this.recipeItemName = recipeItemName;
     }
 
     public String getRecipeServings() {

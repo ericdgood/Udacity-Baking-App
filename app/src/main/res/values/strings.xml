@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">baking app</string>
+    <string name="app_name">Baking App</string>
     <string name="image_of_backed_good">image of backed good</string>
     <string name="serving_size">Serving Size</string>
 </resources>

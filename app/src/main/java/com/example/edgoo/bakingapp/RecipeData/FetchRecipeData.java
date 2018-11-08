@@ -3,6 +3,7 @@ package com.example.edgoo.bakingapp.RecipeData;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.view.View;
 
 import com.example.edgoo.bakingapp.BuildConfig;
 import com.example.edgoo.bakingapp.RecipeAdapter;
@@ -20,7 +21,10 @@ import static android.content.ContentValues.TAG;
 
 public class FetchRecipeData extends AsyncTask<String, Void, Recipes[]> {
 
-    public FetchRecipeData(RecipeAdapter mRecipeAdapter) {
+    private final RecipeAdapter mRecipeAdapter;
+
+    public FetchRecipeData(RecipeAdapter RecipeAdapter) {
+        mRecipeAdapter = RecipeAdapter;
     }
 
     @Override
@@ -38,9 +42,9 @@ public class FetchRecipeData extends AsyncTask<String, Void, Recipes[]> {
 //                BUILDS RECIPE URL INTO STRING URL
             String jsonresponse = getResponseFromHttpUrl(recipeURL);
 //                PARES RECIPE URL
-//            return ParseMoviedb.parseMovieJson(jsonresponse);
-//        } catch (JSONException e) {
-//            e.printStackTrace();
+            return ParseRecipeData.ParseRecipeJson(jsonresponse);
+        } catch (JSONException e) {
+            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -71,5 +75,10 @@ public class FetchRecipeData extends AsyncTask<String, Void, Recipes[]> {
         } finally {
             urlConnection.disconnect();
         }
+    }
+
+    @Override
+    protected void onPostExecute(Recipes[] rocketData) {
+        mRecipeAdapter.setRecipeData(rocketData);
     }
 }

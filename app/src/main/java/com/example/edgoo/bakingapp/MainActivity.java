@@ -6,13 +6,16 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.edgoo.bakingapp.RecipeData.FetchRecipeData;
+import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import butterknife.BindView;
 
 public class MainActivity extends AppCompatActivity {
 
     private RecipeAdapter mRecipeAdapter;
-    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    Recipes[] mRecipes;
+//    @BindView(R.id.recycler_view) RecyclerView recyclerView;
+RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,10 +23,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 //        THINGS NEEDED FOR ROOM AND ADAPTER
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView = findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-//        mRecipeAdapter = new RecipeAdapter( this);
-//        recyclerView.setAdapter(mRecipeAdapter);
+        mRecipeAdapter = new RecipeAdapter( mRecipes,this);
+        recyclerView.setAdapter(mRecipeAdapter);
         
         loadRecipeData();
 

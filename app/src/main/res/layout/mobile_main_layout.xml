@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        tools:src="@drawable/cheesecake"
+        android:src="@drawable/cheesecake"
         android:contentDescription="@string/image_of_backed_good" />
 
     <TextView
@@ -55,11 +55,7 @@
         app:layout_constraintRight_toRightOf="@id/mobile_item_servings_label"
         app:layout_constraintLeft_toLeftOf="@id/mobile_item_servings_label"/>
 
-    <view
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/grey"
-        app:layout_constraintTop_toBottomOf="parent"/>
+    <View style="@style/Divider"/>
 
 
 </android.support.constraint.ConstraintLayout>
