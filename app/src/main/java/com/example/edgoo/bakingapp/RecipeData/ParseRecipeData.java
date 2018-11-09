@@ -1,8 +1,14 @@
 package com.example.edgoo.bakingapp.RecipeData;
 
+import android.util.Log;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 class ParseRecipeData {
 
@@ -22,13 +28,14 @@ class ParseRecipeData {
 
 //            PARSES INGREDIENTS ARRAY
             JSONArray ingredientsArray = currentRecipe.getJSONArray("ingredients");
+            ArrayList<String> ingredientsList = new ArrayList<String>();
             for (int j = 0; j < ingredientsArray.length(); j++) {
 
-                JSONObject currentIngredients = ingredientsArray.getJSONObject(i);
-                recipe[i].setRecipeIngredient(currentIngredients.getString("ingredient"));
-                recipe[i].setIngredientQuantity(currentIngredients.getString("quantity"));
-                recipe[i].setIngredientMeasure(currentIngredients.getString("measure"));
+                JSONObject currentIngredients = ingredientsArray.getJSONObject(j);
+                ingredientsList.add(currentIngredients.getString("ingredient"));
             }
+
+            recipe[i].setRecipeIngredient(ingredientsList);
 
 //            PARSES STEPS ARRAY
             JSONArray stepsArray = currentRecipe.getJSONArray("steps");

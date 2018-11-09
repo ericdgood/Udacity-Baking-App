@@ -3,6 +3,8 @@ package com.example.edgoo.bakingapp.RecipeData;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import java.util.ArrayList;
+
 public class Recipes implements Parcelable {
 
     //    RECIPE ITEMS
@@ -10,7 +12,7 @@ public class Recipes implements Parcelable {
     private String recipeItemName;
     private String recipeServings;
 //    INGREDIENTS ITEMS
-    private String recipeIngredient;
+    private ArrayList recipeIngredient;
     private String ingredientQuantity;
     private String ingredientMeasure;
 //    STEPS ITEMS
@@ -24,7 +26,7 @@ public class Recipes implements Parcelable {
         recipeId = in.readString();
         recipeItemName = in.readString();
         recipeServings = in.readString();
-        recipeIngredient = in.readString();
+        recipeIngredient = in.readArrayList(getClass().getClassLoader());
         ingredientQuantity = in.readString();
         ingredientMeasure = in.readString();
         stepId = in.readString();
@@ -39,7 +41,7 @@ public class Recipes implements Parcelable {
         dest.writeString(recipeId);
         dest.writeString(recipeItemName);
         dest.writeString(recipeServings);
-        dest.writeString(recipeIngredient);
+        dest.writeArray(new ArrayList[]{recipeIngredient});
         dest.writeString(ingredientQuantity);
         dest.writeString(ingredientMeasure);
         dest.writeString(stepId);
@@ -85,11 +87,11 @@ public class Recipes implements Parcelable {
     }
 
 
-    public String getRecipeIngredient() {
+    public ArrayList<String> getRecipeIngredient() {
         return recipeIngredient;
     }
 
-    public void setRecipeIngredient(String recipeIngredient) {
+    public void setRecipeIngredient(ArrayList<String> recipeIngredient) {
         this.recipeIngredient = recipeIngredient;
     }
 

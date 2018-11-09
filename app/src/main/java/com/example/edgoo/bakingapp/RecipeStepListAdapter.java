@@ -3,6 +3,7 @@ package com.example.edgoo.bakingapp;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,11 +13,15 @@ import android.widget.TextView;
 import com.example.edgoo.bakingapp.RecipeData.Recipes;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
+
 public class RecipeStepListAdapter extends RecyclerView.Adapter<RecipeStepListAdapter.ViewHolder> {
 
-    private Recipes[] mRecipes;
+    private ArrayList mRecipes;
 
-    RecipeStepListAdapter(Recipes[] mRecipes) {
+    RecipeStepListAdapter(ArrayList mRecipes) {
         this.mRecipes = mRecipes;
     }
 
@@ -31,7 +36,8 @@ public class RecipeStepListAdapter extends RecyclerView.Adapter<RecipeStepListAd
 
     @Override
     public void onBindViewHolder(@NonNull RecipeStepListAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.ingredientName.setText(mRecipes[i].getRecipeItemName());
+        viewHolder.ingredientName.setText((CharSequence) mRecipes.get(i));
+        Log.i(TAG, "onBindViewHolder: " + mRecipes.get(i));
         }
 
     @NonNull
@@ -44,6 +50,6 @@ public class RecipeStepListAdapter extends RecyclerView.Adapter<RecipeStepListAd
     @Override
     public int getItemCount() {
         if (null == mRecipes) return 0;
-        return mRecipes.length;
+        return mRecipes.size();
     }
 }
