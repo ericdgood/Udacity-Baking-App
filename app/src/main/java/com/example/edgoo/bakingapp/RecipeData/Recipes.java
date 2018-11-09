@@ -13,8 +13,8 @@ public class Recipes implements Parcelable {
     private String recipeServings;
 //    INGREDIENTS ITEMS
     private ArrayList recipeIngredient;
-    private String ingredientQuantity;
-    private String ingredientMeasure;
+    private ArrayList ingredientQuantity;
+    private ArrayList ingredientMeasure;
 //    STEPS ITEMS
     private String stepId;
     private String shortDescription;
@@ -27,8 +27,8 @@ public class Recipes implements Parcelable {
         recipeItemName = in.readString();
         recipeServings = in.readString();
         recipeIngredient = in.readArrayList(getClass().getClassLoader());
-        ingredientQuantity = in.readString();
-        ingredientMeasure = in.readString();
+        ingredientQuantity = in.readArrayList(getClass().getClassLoader());
+        ingredientMeasure = in.readArrayList(getClass().getClassLoader());
         stepId = in.readString();
         shortDescription = in.readString();
         description = in.readString();
@@ -42,8 +42,8 @@ public class Recipes implements Parcelable {
         dest.writeString(recipeItemName);
         dest.writeString(recipeServings);
         dest.writeArray(new ArrayList[]{recipeIngredient});
-        dest.writeString(ingredientQuantity);
-        dest.writeString(ingredientMeasure);
+        dest.writeArray(new ArrayList[]{ingredientQuantity});
+        dest.writeArray(new ArrayList[]{ingredientMeasure});
         dest.writeString(stepId);
         dest.writeString(shortDescription);
         dest.writeString(description);
@@ -95,19 +95,19 @@ public class Recipes implements Parcelable {
         this.recipeIngredient = recipeIngredient;
     }
 
-    public String getIngredientQuantity() {
+    public ArrayList<String> getIngredientQuantity() {
         return ingredientQuantity;
     }
 
-    public void setIngredientQuantity(String ingredientQuantity) {
+    public void setIngredientQuantity(ArrayList<String> ingredientQuantity) {
         this.ingredientQuantity = ingredientQuantity;
     }
 
-    public String getIngredientMeasure() {
+    public ArrayList<String> getIngredientMeasure() {
         return ingredientMeasure;
     }
 
-    public void setIngredientMeasure(String ingredientMeasure) {
+    public void setIngredientMeasure(ArrayList<String> ingredientMeasure) {
         this.ingredientMeasure = ingredientMeasure;
     }
 

@@ -17,7 +17,6 @@ import static android.content.ContentValues.TAG;
 public class RecipeStepList extends AppCompatActivity {
 
     private RecipeStepListAdapter mRecipeStepListAdapter;
-    Recipes[] mRecipes;
     RecyclerView recyclerView;
 
     @Override
@@ -26,13 +25,15 @@ public class RecipeStepList extends AppCompatActivity {
         setContentView(R.layout.mobile_recipe_step_list_layout);
 
         setTitle(getIntent().getStringExtra("recipe_name"));
-        ArrayList ingres = getIntent().getStringArrayListExtra("ingredients");
+        ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
+        ArrayList ingredientsQty = getIntent().getStringArrayListExtra("ingredients_qty");
+        ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
 
 //        THINGS NEEDED FOR ROOM AND ADAPTER
         recyclerView = findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecipeStepListAdapter = new RecipeStepListAdapter(ingres);
+        mRecipeStepListAdapter = new RecipeStepListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
         recyclerView.setAdapter(mRecipeStepListAdapter);
 
     }

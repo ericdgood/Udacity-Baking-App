@@ -29,13 +29,19 @@ class ParseRecipeData {
 //            PARSES INGREDIENTS ARRAY
             JSONArray ingredientsArray = currentRecipe.getJSONArray("ingredients");
             ArrayList<String> ingredientsList = new ArrayList<String>();
+            ArrayList<String> ingredientsQtyList = new ArrayList<String>();
+            ArrayList<String> ingredientsMeasureList = new ArrayList<String>();
             for (int j = 0; j < ingredientsArray.length(); j++) {
 
                 JSONObject currentIngredients = ingredientsArray.getJSONObject(j);
                 ingredientsList.add(currentIngredients.getString("ingredient"));
+                ingredientsQtyList.add(currentIngredients.getString("quantity"));
+                ingredientsMeasureList.add(currentIngredients.getString("measure"));
             }
 
             recipe[i].setRecipeIngredient(ingredientsList);
+            recipe[i].setIngredientQuantity(ingredientsQtyList);
+            recipe[i].setIngredientMeasure(ingredientsMeasureList);
 
 //            PARSES STEPS ARRAY
             JSONArray stepsArray = currentRecipe.getJSONArray("steps");

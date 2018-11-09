@@ -3,13 +3,32 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/colorAccent">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/ingredient_qty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="6"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/ingredient_measure"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        tools:text="Cups"
+        android:padding="5dp"
+        app:layout_constraintLeft_toRightOf="@id/ingredient_qty"/>
 
     <TextView
         android:id="@+id/ingredient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        tools:text="Mascapone Cheese(room temperature)"/>
+        tools:text="Mascapone Cheese(room temperature)"
+        android:padding="5dp"
+        app:layout_constraintLeft_toRightOf="@id/ingredient_measure"/>
 
 </android.support.constraint.ConstraintLayout>
