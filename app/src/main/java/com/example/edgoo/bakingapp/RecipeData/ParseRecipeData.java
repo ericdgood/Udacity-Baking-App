@@ -43,17 +43,28 @@ class ParseRecipeData {
             recipe[i].setIngredientQuantity(ingredientsQtyList);
             recipe[i].setIngredientMeasure(ingredientsMeasureList);
 
-//            PARSES STEPS ARRAY
+//            PARSES INGREDIENTS ARRAY
             JSONArray stepsArray = currentRecipe.getJSONArray("steps");
-            for (int k = 0; k < stepsArray.length(); k++) {
+            ArrayList<String> stepId = new ArrayList<String>();
+            ArrayList<String> shortDescription = new ArrayList<String>();
+            ArrayList<String> description = new ArrayList<String>();
+            ArrayList<String> videoURL = new ArrayList<String>();
+            ArrayList<String> thumbnailURL = new ArrayList<String>();
+            for (int j = 0; j < stepsArray.length(); j++) {
 
-                JSONObject currentStep = stepsArray.getJSONObject(i);
-                recipe[i].setStepId(currentStep.getString("id"));
-                recipe[i].setShortDescription(currentStep.getString("shortDescription"));
-                recipe[i].setDescription(currentStep.getString("description"));
-                recipe[i].setVideoUrl(currentStep.getString("videoURL"));
-                recipe[i].setThumbnilUrl(currentStep.getString("thumbnailURL"));
+                JSONObject currentStep = stepsArray.getJSONObject(j);
+                stepId.add(currentStep.getString("id"));
+                shortDescription.add(currentStep.getString("shortDescription"));
+                description.add(currentStep.getString("description"));
+                videoURL.add(currentStep.getString("videoURL"));
+                thumbnailURL.add(currentStep.getString("thumbnailURL"));
             }
+
+            recipe[i].setStepId(stepId);
+            recipe[i].setShortDescription(shortDescription);
+            recipe[i].setDescription(description);
+            recipe[i].setVideoUrl(videoURL);
+            recipe[i].setThumbnilUrl(thumbnailURL);
         }
         return recipe;
     }

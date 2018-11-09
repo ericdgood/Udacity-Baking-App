@@ -4,38 +4,38 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.example.edgoo.bakingapp.RecipeData.FetchRecipeData;
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 public class RecipeStepList extends AppCompatActivity {
 
-    private RecipeStepListAdapter mRecipeStepListAdapter;
     RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.mobile_recipe_step_list_layout);
+        setContentView(R.layout.mobile_recipe_step_list);
 
         setTitle(getIntent().getStringExtra("recipe_name"));
         ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
         ArrayList ingredientsQty = getIntent().getStringArrayListExtra("ingredients_qty");
         ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
+        ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
+        ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
 
-//        THINGS NEEDED FOR ROOM AND ADAPTER
-        recyclerView = findViewById(R.id.recycler_view);
+//        RECYCLERVIEW FOR INGREDIENTS
+        recyclerView = findViewById(R.id.recycler_view_ingred);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecipeStepListAdapter = new RecipeStepListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
-        recyclerView.setAdapter(mRecipeStepListAdapter);
+        RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
+        recyclerView.setAdapter(mRecipeIngredientsListAdapter);
 
+//        RECYCLERVIEW FOR STEPS
+        recyclerView = findViewById(R.id.recipe_steps_list);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(stepId, shortDescription);
+        recyclerView.setAdapter(mRecipeStepsListAdapter);
     }
 
 }

@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="6"
+        android:textColor="@color/black"
         android:paddingTop="4dp"
         android:paddingLeft="16dp" />
 
@@ -20,6 +21,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="Cups"
+        android:textColor="@color/black"
         android:paddingTop="4dp"
         android:paddingLeft="4dp"
         app:layout_constraintLeft_toRightOf="@id/ingredient_qty"/>
@@ -29,6 +31,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/dash"
+        android:textColor="@color/black"
         android:paddingTop="4dp"
         android:paddingLeft="5dp"
         android:paddingRight="10dp"
@@ -41,6 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/black"
         tools:text="Mascapone Cheese(room temperature)"
         android:paddingTop="4dp"
         app:layout_constraintLeft_toRightOf="@id/dash"/>

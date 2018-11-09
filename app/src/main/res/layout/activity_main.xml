@@ -7,6 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <include layout="@layout/contain_main" />
+    <include layout="@layout/recyclerview" />
 
 </android.support.constraint.ConstraintLayout>

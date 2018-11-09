@@ -15,12 +15,12 @@ public class Recipes implements Parcelable {
     private ArrayList recipeIngredient;
     private ArrayList ingredientQuantity;
     private ArrayList ingredientMeasure;
-//    STEPS ITEMS
-    private String stepId;
-    private String shortDescription;
-    private String description;
-    private String videoUrl;
-    private String thumbnilUrl;
+    //    STEPS ITEMS
+    private ArrayList stepId;
+    private ArrayList shortDescription;
+    private ArrayList description;
+    private ArrayList videoUrl;
+    private ArrayList thumbnilUrl;
 
     private Recipes(Parcel in) {
         recipeId = in.readString();
@@ -29,11 +29,11 @@ public class Recipes implements Parcelable {
         recipeIngredient = in.readArrayList(getClass().getClassLoader());
         ingredientQuantity = in.readArrayList(getClass().getClassLoader());
         ingredientMeasure = in.readArrayList(getClass().getClassLoader());
-        stepId = in.readString();
-        shortDescription = in.readString();
-        description = in.readString();
-        videoUrl = in.readString();
-        thumbnilUrl = in.readString();
+        stepId = in.readArrayList(getClass().getClassLoader());
+        shortDescription = in.readArrayList(getClass().getClassLoader());
+        description = in.readArrayList(getClass().getClassLoader());
+        videoUrl = in.readArrayList(getClass().getClassLoader());
+        thumbnilUrl = in.readArrayList(getClass().getClassLoader());
     }
 
     @Override
@@ -44,11 +44,11 @@ public class Recipes implements Parcelable {
         dest.writeArray(new ArrayList[]{recipeIngredient});
         dest.writeArray(new ArrayList[]{ingredientQuantity});
         dest.writeArray(new ArrayList[]{ingredientMeasure});
-        dest.writeString(stepId);
-        dest.writeString(shortDescription);
-        dest.writeString(description);
-        dest.writeString(videoUrl);
-        dest.writeString(thumbnilUrl);
+        dest.writeArray(new ArrayList[]{stepId});
+        dest.writeArray(new ArrayList[]{shortDescription});
+        dest.writeArray(new ArrayList[]{description});
+        dest.writeArray(new ArrayList[]{videoUrl});
+        dest.writeArray(new ArrayList[]{thumbnilUrl});
     }
 
     Recipes(){    }
@@ -120,43 +120,45 @@ public class Recipes implements Parcelable {
         this.recipeId = recipeId;
     }
 
-    public String getStepId() {
+
+
+    public ArrayList getStepId() {
         return stepId;
     }
 
-    public void setStepId(String stepId) {
+    public void setStepId(ArrayList stepId) {
         this.stepId = stepId;
     }
 
-    public String getShortDescription() {
+    public ArrayList getShortDescription() {
         return shortDescription;
     }
 
-    public void setShortDescription(String shortDescription) {
+    public void setShortDescription(ArrayList shortDescription) {
         this.shortDescription = shortDescription;
     }
 
-    public String getDescription() {
+    public ArrayList getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(ArrayList description) {
         this.description = description;
     }
 
-    public String getVideoUrl() {
+    public ArrayList getVideoUrl() {
         return videoUrl;
     }
 
-    public void setVideoUrl(String videoUrl) {
+    public void setVideoUrl(ArrayList videoUrl) {
         this.videoUrl = videoUrl;
     }
 
-    public String getThumbnilUrl() {
+    public ArrayList getThumbnilUrl() {
         return thumbnilUrl;
     }
 
-    public void setThumbnilUrl(String thumbnilUrl) {
+    public void setThumbnilUrl(ArrayList thumbnilUrl) {
         this.thumbnilUrl = thumbnilUrl;
     }
 
