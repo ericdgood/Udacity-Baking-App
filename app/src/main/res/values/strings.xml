@@ -2,4 +2,6 @@
     <string name="app_name">Baking Time</string>
     <string name="image_of_backed_good">image of backed good</string>
     <string name="serving_size">Serving Size</string>
+    <string name="ingred_list_label">Ingredients List</string>
+    <string name="dash">-</string>
 </resources>

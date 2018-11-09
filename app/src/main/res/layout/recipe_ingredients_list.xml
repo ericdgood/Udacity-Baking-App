@@ -11,7 +11,8 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="6"
-        android:padding="5dp"/>
+        android:paddingTop="4dp"
+        android:paddingLeft="16dp" />
 
     <TextView
         android:id="@+id/ingredient_measure"
@@ -19,16 +20,29 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="Cups"
-        android:padding="5dp"
+        android:paddingTop="4dp"
+        android:paddingLeft="4dp"
         app:layout_constraintLeft_toRightOf="@id/ingredient_qty"/>
 
+    <TextView
+        android:id="@+id/dash"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/dash"
+        android:paddingTop="4dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="10dp"
+        app:layout_constraintLeft_toRightOf="@id/ingredient_measure"/>
+
+
+<!--TODO: wrap text-->
     <TextView
         android:id="@+id/ingredient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
         tools:text="Mascapone Cheese(room temperature)"
-        android:padding="5dp"
-        app:layout_constraintLeft_toRightOf="@id/ingredient_measure"/>
+        android:paddingTop="4dp"
+        app:layout_constraintLeft_toRightOf="@id/dash"/>
 
 </android.support.constraint.ConstraintLayout>
