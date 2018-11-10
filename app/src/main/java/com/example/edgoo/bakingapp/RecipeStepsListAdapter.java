@@ -25,15 +25,13 @@ import static android.content.ContentValues.TAG;
 class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter.ViewHolder> {
 
     private Context mContext;
-    private final ArrayList mDescription;
     private ArrayList mStepId;
     private ArrayList mShortDescription;
 
-    RecipeStepsListAdapter(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription, ArrayList description) {
+    RecipeStepsListAdapter(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription) {
         this.mContext = recipeStepList;
         this.mStepId = stepId;
         this.mShortDescription = shortDescription;
-        this.mDescription = description;
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -57,7 +55,6 @@ class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, RecipeStep.class);
                     CharSequence step_id = ((CharSequence) mStepId.get(i));
-                    intent.putExtra("description", mDescription);
                     intent.putExtra("step_id", step_id);
                     mContext.startActivity(intent);
                 }

@@ -5,11 +5,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -28,17 +26,12 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
-import java.net.URI;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import butterknife.OnClick;
 
-import static android.content.ContentValues.TAG;
-
-public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener{
+public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener {
 
     @BindView(R.id.step_description)
     TextView description;
@@ -48,7 +41,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     ImageButton nextStep;
     int currentStepDisplay;
     int arrayListSize;
-//    EXOPLAYER
+    //    EXOPLAYER
     private SimpleExoPlayer mExoPlayer;
     @BindView(R.id.playerView)
     SimpleExoPlayerView mPlayerView;
@@ -59,7 +52,9 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         setContentView(R.layout.recipe_step);
         ButterKnife.bind(this);
 
-        final ArrayList descriptionsArray = getIntent().getStringArrayListExtra("description");
+        final ArrayList videoUrl = RecipeAdapter.videoUrl;
+        final ArrayList thumbUrl = RecipeAdapter.thumbUrl;
+        final ArrayList descriptionsArray = RecipeAdapter.description;
         arrayListSize = descriptionsArray.size() - 1;
         int step_id = Integer.parseInt(getIntent().getStringExtra("step_id"));
         currentStepDisplay = step_id;
@@ -69,18 +64,18 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
 
         nextStep.setOnClickListener(v -> {
             if (currentStepDisplay < arrayListSize) {
-            currentStepDisplay = currentStepDisplay + 1;
-                    description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
-                }
-            });
+                currentStepDisplay = currentStepDisplay + 1;
+                description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+            }
+        });
 
         previousStep.setOnClickListener(v -> {
             if (currentStepDisplay >= 1) {
-            currentStepDisplay = currentStepDisplay - 1;
-            description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+                currentStepDisplay = currentStepDisplay - 1;
+                description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
             }
         });
-    Uri textUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4");
+        Uri textUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4");
         initializePlayer(textUri);
     }
 

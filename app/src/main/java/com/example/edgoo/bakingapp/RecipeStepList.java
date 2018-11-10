@@ -32,7 +32,6 @@ public class RecipeStepList extends AppCompatActivity {
         ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
         ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
         ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
-        ArrayList description = getIntent().getStringArrayListExtra("description");
 
 //        RECYCLERVIEW FOR INGREDIENTS
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -43,7 +42,7 @@ public class RecipeStepList extends AppCompatActivity {
 //        RECYCLERVIEW FOR STEPS
         recipeStepListRecycler.setLayoutManager(new LinearLayoutManager(this));
 
-        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(this, stepId, shortDescription, description);
+        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(this, stepId, shortDescription);
         recipeStepListRecycler.setAdapter(mRecipeStepsListAdapter);
     }
 

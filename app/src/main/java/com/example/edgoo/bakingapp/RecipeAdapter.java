@@ -2,31 +2,29 @@ package com.example.edgoo.bakingapp;
 
 import android.content.Context;
 import android.content.Intent;
-import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.edgoo.bakingapp.RecipeData.Recipes;
 import com.squareup.picasso.Picasso;
 
-import org.w3c.dom.Text;
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static android.content.ContentValues.TAG;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private Recipes[] mRecipes;
     private Context mContext;
+    public static ArrayList description;
+    public static ArrayList videoUrl;
+    public static ArrayList thumbUrl;
 
     RecipeAdapter(Recipes[] mRecipes, Context mContext) {
         this.mRecipes = mRecipes;
@@ -60,8 +58,11 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 intent.putExtra("ingredients_measure", mRecipes[i].getIngredientMeasure());
                 intent.putExtra("step_id", mRecipes[i].getStepId());
                 intent.putExtra("short_description", mRecipes[i].getShortDescription());
-                intent.putExtra("description", mRecipes[i].getDescription());
                 mContext.startActivity(intent);
+
+                description = (mRecipes[i].getDescription());
+                videoUrl = (mRecipes[i].getVideoUrl());
+                thumbUrl = (mRecipes[i].getThumbnilUrl());
             }
         });
 
