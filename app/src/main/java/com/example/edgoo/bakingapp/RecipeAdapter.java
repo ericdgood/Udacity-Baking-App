@@ -61,6 +61,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 intent.putExtra("ingredients_measure", mRecipes[i].getIngredientMeasure());
                 intent.putExtra("step_id", mRecipes[i].getStepId());
                 intent.putExtra("short_description", mRecipes[i].getShortDescription());
+                intent.putExtra("description", mRecipes[i].getDescription());
                 mContext.startActivity(intent);
             }
         });

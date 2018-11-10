@@ -50,9 +50,9 @@ class ParseRecipeData {
             ArrayList<String> description = new ArrayList<String>();
             ArrayList<String> videoURL = new ArrayList<String>();
             ArrayList<String> thumbnailURL = new ArrayList<String>();
-            for (int j = 0; j < stepsArray.length(); j++) {
+            for (int k = 0; k < stepsArray.length(); k++) {
 
-                JSONObject currentStep = stepsArray.getJSONObject(j);
+                JSONObject currentStep = stepsArray.getJSONObject(k);
                 stepId.add(currentStep.getString("id"));
                 shortDescription.add(currentStep.getString("shortDescription"));
                 description.add(currentStep.getString("description"));

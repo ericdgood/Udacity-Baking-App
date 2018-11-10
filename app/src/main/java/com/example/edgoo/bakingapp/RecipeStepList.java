@@ -4,8 +4,13 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import java.util.ArrayList;
+
+import static android.content.ContentValues.TAG;
 
 public class RecipeStepList extends AppCompatActivity {
 
@@ -22,6 +27,7 @@ public class RecipeStepList extends AppCompatActivity {
         ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
         ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
         ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
+        ArrayList description = getIntent().getStringArrayListExtra("description");
 
 //        RECYCLERVIEW FOR INGREDIENTS
         recyclerView = findViewById(R.id.recycler_view_ingred);
@@ -34,7 +40,7 @@ public class RecipeStepList extends AppCompatActivity {
         recyclerView = findViewById(R.id.recipe_steps_list);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(stepId, shortDescription);
+        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(this, stepId, shortDescription, description);
         recyclerView.setAdapter(mRecipeStepsListAdapter);
     }
 
