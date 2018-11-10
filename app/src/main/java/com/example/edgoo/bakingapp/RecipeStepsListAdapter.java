@@ -55,9 +55,10 @@ class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter
             viewHolder.recipeStepListLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String stepDescription = (String) mDescription.get(i);
                     Intent intent = new Intent(mContext, RecipeStep.class);
-                    intent.putExtra("description", stepDescription);
+                    CharSequence step_id = ((CharSequence) mStepId.get(i));
+                    intent.putExtra("description", mDescription);
+                    intent.putExtra("step_id", step_id);
                     mContext.startActivity(intent);
                 }
             });
