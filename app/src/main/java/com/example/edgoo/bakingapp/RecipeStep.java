@@ -37,8 +37,7 @@ public class RecipeStep extends AppCompatActivity {
         ButterKnife.bind(this);
 
         final ArrayList descriptionsArray = getIntent().getStringArrayListExtra("description");
-        arrayListSize = descriptionsArray.size();
-        Log.i(TAG, "onCreate: " + arrayListSize);
+        arrayListSize = descriptionsArray.size() - 1;
         int step_id = Integer.parseInt(getIntent().getStringExtra("step_id"));
         currentStepDisplay = step_id;
 
