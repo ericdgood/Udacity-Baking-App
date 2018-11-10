@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -40,6 +42,8 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     ImageButton previousStep;
     @BindView(R.id.next_step)
     ImageButton nextStep;
+    @BindView(R.id.no_video)
+    ImageView noVideo;
     int currentStepDisplay;
     int arrayListSize;
     //    EXOPLAYER
@@ -61,7 +65,13 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         currentStepDisplay = step_id;
 
         //        GETS VIDEO AND SENDS TO EXO PLAYER
-        initializePlayer(Uri.parse(String.valueOf(videoUrl.get(step_id))));
+        if (!String.valueOf(videoUrl.get(step_id)).equals("")){
+            initializePlayer(Uri.parse(String.valueOf(videoUrl.get(step_id))));
+        } else if (!String.valueOf(thumbUrl.get(step_id)).equals("")) {
+            initializePlayer(Uri.parse(String.valueOf(thumbUrl.get(step_id))));
+        } else {
+            noVideo.setVisibility(View.VISIBLE);
+        }
 
 //        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS
         description.setText((CharSequence) descriptionsArray.get(step_id));
@@ -71,11 +81,10 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                 currentStepDisplay = currentStepDisplay + 1;
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
 
-                mExoPlayer.stop();
-                Intent nextQuestionIntent = new Intent(RecipeStep.this, RecipeStep.class);
-                nextQuestionIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
+                Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
+                nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
                 finish();
-                startActivity(nextQuestionIntent);
+                startActivity(nextStepIntent);
             }
         });
 
@@ -84,11 +93,10 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                 currentStepDisplay = currentStepDisplay - 1;
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
 
-                mExoPlayer.stop();
-                Intent nextQuestionIntent = new Intent(RecipeStep.this, RecipeStep.class);
-                nextQuestionIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
+                Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
+                nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
                 finish();
-                startActivity(nextQuestionIntent);
+                startActivity(nextStepIntent);
             }
         });
     }
@@ -111,18 +119,6 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        releasePlayer();
-    }
-
-    private void releasePlayer() {
-        mExoPlayer.stop();
-        mExoPlayer.release();
-        mExoPlayer = null;
     }
 
     @Override
