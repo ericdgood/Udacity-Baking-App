@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -9,7 +10,25 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.edgoo.bakingapp.RecipeData.Recipes;
+import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.ExoPlaybackException;
+import com.google.android.exoplayer2.ExoPlayer;
+import com.google.android.exoplayer2.ExoPlayerFactory;
+import com.google.android.exoplayer2.LoadControl;
+import com.google.android.exoplayer2.SimpleExoPlayer;
+import com.google.android.exoplayer2.Timeline;
+import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
+import com.google.android.exoplayer2.source.ExtractorMediaSource;
+import com.google.android.exoplayer2.source.MediaSource;
+import com.google.android.exoplayer2.source.TrackGroupArray;
+import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
+import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
+import com.google.android.exoplayer2.trackselection.TrackSelector;
+import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -19,7 +38,7 @@ import butterknife.OnClick;
 
 import static android.content.ContentValues.TAG;
 
-public class RecipeStep extends AppCompatActivity {
+public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener{
 
     @BindView(R.id.step_description)
     TextView description;
@@ -29,6 +48,10 @@ public class RecipeStep extends AppCompatActivity {
     ImageButton nextStep;
     int currentStepDisplay;
     int arrayListSize;
+//    EXOPLAYER
+    private SimpleExoPlayer mExoPlayer;
+    @BindView(R.id.playerView)
+    SimpleExoPlayerView mPlayerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,6 +80,57 @@ public class RecipeStep extends AppCompatActivity {
             description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
             }
         });
+    Uri textUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4");
+        initializePlayer(textUri);
+    }
+
+    private void initializePlayer(Uri mediaUri) {
+        if (mExoPlayer == null) {
+            // Create an instance of the ExoPlayer.
+            TrackSelector trackSelector = new DefaultTrackSelector();
+            LoadControl loadControl = new DefaultLoadControl();
+            mExoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector, loadControl);
+            mPlayerView.setPlayer(mExoPlayer);
+
+            // Set the ExoPlayer.EventListener to this activity.
+            mExoPlayer.addListener(this);
+
+            // Prepare the MediaSource.
+            String userAgent = Util.getUserAgent(this, "ClassicalMusicQuiz");
+            MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
+                    this, userAgent), new DefaultExtractorsFactory(), null, null);
+            mExoPlayer.prepare(mediaSource);
+            mExoPlayer.setPlayWhenReady(true);
+        }
+    }
+
+    @Override
+    public void onTimelineChanged(Timeline timeline, Object manifest) {
+//      LEAVE BLANK
+    }
+
+    @Override
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray trackSelections) {
+//      LEAVE BLANK
+    }
+
+    @Override
+    public void onLoadingChanged(boolean isLoading) {
+//      LEAVE BLANK
+    }
+
+    @Override
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
+    }
+
+    @Override
+    public void onPlayerError(ExoPlaybackException error) {
+//      LEAVE BLANK
+    }
+
+    @Override
+    public void onPositionDiscontinuity() {
+//      LEAVE BLANK
     }
 }
 
