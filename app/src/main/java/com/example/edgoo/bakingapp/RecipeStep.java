@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -60,8 +61,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         currentStepDisplay = step_id;
 
         //        GETS VIDEO AND SENDS TO EXO PLAYER
-        Uri textUri = Uri.parse(String.valueOf(videoUrl.get(step_id)));
-        initializePlayer(textUri);
+        initializePlayer(Uri.parse(String.valueOf(videoUrl.get(step_id))));
 
 //        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS
         description.setText((CharSequence) descriptionsArray.get(step_id));
@@ -70,12 +70,19 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             if (currentStepDisplay < arrayListSize) {
                 currentStepDisplay = currentStepDisplay + 1;
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+
+                mExoPlayer.stop();
+                Intent nextQuestionIntent = new Intent(RecipeStep.this, RecipeStep.class);
+                nextQuestionIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
+                finish();
+                startActivity(nextQuestionIntent);
             }
         });
 
         previousStep.setOnClickListener(v -> {
             if (currentStepDisplay >= 1) {
                 currentStepDisplay = currentStepDisplay - 1;
+                initializePlayer(Uri.parse(String.valueOf(videoUrl.get(currentStepDisplay))));
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
             }
         });
@@ -99,6 +106,18 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             mExoPlayer.prepare(mediaSource);
             mExoPlayer.setPlayWhenReady(true);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        releasePlayer();
+    }
+
+    private void releasePlayer() {
+        mExoPlayer.stop();
+        mExoPlayer.release();
+        mExoPlayer = null;
     }
 
     @Override
