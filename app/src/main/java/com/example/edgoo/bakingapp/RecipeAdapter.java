@@ -19,6 +19,7 @@ import com.squareup.picasso.Picasso;
 import org.w3c.dom.Text;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 
 import static android.content.ContentValues.TAG;
 
@@ -33,15 +34,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView itemName;
-        TextView itemServings;
-        ImageView recipeImage;
+        @BindView(R.id.mobile_item_name) TextView itemName;
+        @BindView(R.id.mobile_item_servings) TextView itemServings;
+        @BindView(R.id.mobile_item_image) ImageView recipeImage;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            itemName = itemView.findViewById(R.id.mobile_item_name);
-            itemServings = itemView.findViewById(R.id.mobile_item_servings);
-            recipeImage = itemView.findViewById(R.id.mobile_item_image);
+            ButterKnife.bind(this, itemView);
         }
     }
 

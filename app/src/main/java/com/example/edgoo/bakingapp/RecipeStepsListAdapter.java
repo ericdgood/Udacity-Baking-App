@@ -16,6 +16,10 @@ import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
+
 import static android.content.ContentValues.TAG;
 
 class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter.ViewHolder> {
@@ -33,15 +37,13 @@ class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView stepId;
-        TextView shortDescription;
-        ConstraintLayout recipeStepListLayout;
+        @BindView(R.id.step_id) TextView stepId;
+        @BindView(R.id.short_description) TextView shortDescription;
+        @BindView(R.id.recipe_step_list_layout) ConstraintLayout recipeStepListLayout;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            stepId = itemView.findViewById(R.id.step_id);
-            shortDescription = itemView.findViewById(R.id.short_description);
-            recipeStepListLayout = itemView.findViewById(R.id.recipe_step_list_layout);
+            ButterKnife.bind(this, itemView);
         }
     }
 
@@ -49,7 +51,7 @@ class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter
         public void onBindViewHolder(@NonNull RecipeStepsListAdapter.ViewHolder viewHolder, final int i) {
             viewHolder.stepId.setText((CharSequence) mStepId.get(i));
             viewHolder.shortDescription.setText((CharSequence) mShortDescription.get(i));
-
+            
             viewHolder.recipeStepListLayout.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
