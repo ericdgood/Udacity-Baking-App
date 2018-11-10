@@ -59,6 +59,10 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         int step_id = Integer.parseInt(getIntent().getStringExtra("step_id"));
         currentStepDisplay = step_id;
 
+        //        GETS VIDEO AND SENDS TO EXO PLAYER
+        Uri textUri = Uri.parse(String.valueOf(videoUrl.get(step_id)));
+        initializePlayer(textUri);
+
 //        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS
         description.setText((CharSequence) descriptionsArray.get(step_id));
 
@@ -75,8 +79,6 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
             }
         });
-        Uri textUri = Uri.parse("https://d17h27t6h515a5.cloudfront.net/topher/2017/April/58ffd974_-intro-creampie/-intro-creampie.mp4");
-        initializePlayer(textUri);
     }
 
     private void initializePlayer(Uri mediaUri) {
