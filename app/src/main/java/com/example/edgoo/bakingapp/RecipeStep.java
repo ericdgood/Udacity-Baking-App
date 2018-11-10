@@ -82,8 +82,13 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         previousStep.setOnClickListener(v -> {
             if (currentStepDisplay >= 1) {
                 currentStepDisplay = currentStepDisplay - 1;
-                initializePlayer(Uri.parse(String.valueOf(videoUrl.get(currentStepDisplay))));
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+
+                mExoPlayer.stop();
+                Intent nextQuestionIntent = new Intent(RecipeStep.this, RecipeStep.class);
+                nextQuestionIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
+                finish();
+                startActivity(nextQuestionIntent);
             }
         });
     }
