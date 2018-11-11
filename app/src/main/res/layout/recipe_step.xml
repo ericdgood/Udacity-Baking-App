@@ -22,13 +22,31 @@
         android:layout_marginLeft="0dp"
         app:layout_constraintLeft_toLeftOf="parent" />
 
-        <ImageView
+        <RelativeLayout
             android:id="@+id/no_video"
             android:layout_width="match_parent"
             android:layout_height="270dp"
-            android:src="@drawable/baking_clipart_2"
-            android:visibility="gone"
-            android:contentDescription="@string/logo"/>
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/baking_clipart_2"
+                android:paddingTop="40dp"
+                android:paddingBottom="10dp"
+                android:contentDescription="@string/logo"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/sorry_no_video"
+                android:textSize="24sp"
+                android:textAlignment="center"
+                android:paddingBottom="10dp"
+                android:textColor="@color/black"/>
+
+
+        </RelativeLayout>
 
 
     <TextView

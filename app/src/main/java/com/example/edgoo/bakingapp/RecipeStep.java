@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -43,7 +44,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     @BindView(R.id.next_step)
     ImageButton nextStep;
     @BindView(R.id.no_video)
-    ImageView noVideo;
+    RelativeLayout noVideo;
     int currentStepDisplay;
     int arrayListSize;
     //    EXOPLAYER
@@ -71,6 +72,8 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             initializePlayer(Uri.parse(String.valueOf(thumbUrl.get(step_id))));
         } else {
             noVideo.setVisibility(View.VISIBLE);
+            initializePlayer(Uri.parse(""));
+            mPlayerView.setVisibility(View.INVISIBLE);
         }
 
 //        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS
@@ -81,6 +84,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                 currentStepDisplay = currentStepDisplay + 1;
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
 
+                mExoPlayer.stop();
                 Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
                 nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
                 finish();
@@ -93,6 +97,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                 currentStepDisplay = currentStepDisplay - 1;
                 description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
 
+                mExoPlayer.stop();
                 Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
                 nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
                 finish();
