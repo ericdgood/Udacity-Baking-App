@@ -32,9 +32,8 @@
             style="@style/Divider"
             android:layout_below="@id/recycler_view_ingred"/>
 
-        <!--RECIPE STEPS-->
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recipe_steps_list"
+        <FrameLayout
+            android:id="@+id/recipe_step_list_frag"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_below="@id/dividerline"/>

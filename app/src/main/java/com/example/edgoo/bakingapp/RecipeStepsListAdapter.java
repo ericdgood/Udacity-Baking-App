@@ -22,13 +22,13 @@ import butterknife.OnClick;
 
 import static android.content.ContentValues.TAG;
 
-class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter.ViewHolder> {
+public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter.ViewHolder> {
 
     private Context mContext;
     private ArrayList mStepId;
     private ArrayList mShortDescription;
 
-    RecipeStepsListAdapter(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription) {
+    public RecipeStepsListAdapter(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription) {
         this.mContext = recipeStepList;
         this.mStepId = stepId;
         this.mShortDescription = shortDescription;

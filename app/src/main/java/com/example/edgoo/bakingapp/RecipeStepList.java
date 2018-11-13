@@ -1,24 +1,21 @@
 package com.example.edgoo.bakingapp;
 
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
+import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static android.content.ContentValues.TAG;
-
 public class RecipeStepList extends AppCompatActivity {
 
     @BindView(R.id.recycler_view_ingred) RecyclerView recyclerView;
-    @BindView(R.id.recipe_steps_list) RecyclerView recipeStepListRecycler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,11 +36,17 @@ public class RecipeStepList extends AppCompatActivity {
         RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
         recyclerView.setAdapter(mRecipeIngredientsListAdapter);
 
-//        RECYCLERVIEW FOR STEPS
-        recipeStepListRecycler.setLayoutManager(new LinearLayoutManager(this));
+        // CREATES A NEW FRAGMENT FOR STEPS LIST
+        StepsListFragment stepsFragment = new StepsListFragment();
 
-        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(this, stepId, shortDescription);
-        recipeStepListRecycler.setAdapter(mRecipeStepsListAdapter);
+        // Add the fragment to its container using a FragmentManager and a Transaction
+        FragmentManager fragmentManager = getSupportFragmentManager();
+
+        stepsFragment.StepsList(this, stepId, shortDescription);
+        fragmentManager.beginTransaction()
+                .add(R.id.recipe_step_list_frag, stepsFragment)
+                .commit();
+
     }
 
 }
