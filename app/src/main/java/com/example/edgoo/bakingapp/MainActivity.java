@@ -19,7 +19,6 @@ import butterknife.ButterKnife;
 public class MainActivity extends AppCompatActivity {
 
     private RecipeAdapter mRecipeAdapter;
-    private RecipeAdapterTab mAdapterGrid;
     Recipes[] mRecipes;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
 
@@ -27,24 +26,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-//        ButterKnife.bind(this);
+        ButterKnife.bind(this);
 
-
-        if (findViewById(R.id.main_gridview) != null) {
-//            GridView gridView = (GridView) findViewById(R.id.main_gridview);
-            RecyclerView recyclerView = findViewById(R.id.recycler_view);
-            GridLayoutManager glm = new GridLayoutManager(this, 2);
-            recyclerView.setLayoutManager(glm);
+        if (findViewById(R.id.table_layout) != null) {
+            recyclerView.setLayoutManager( new GridLayoutManager(this, 2));
             mRecipeAdapter = new RecipeAdapter(mRecipes, this);
-//            mAdapterGrid = new RecipeAdapterTab(mRecipes, this);
             recyclerView.setAdapter(mRecipeAdapter);
             loadRecipeData();
         } else {
 
-            ButterKnife.bind(this);
-//        THINGS NEEDED FOR ROOM AND ADAPTER
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
             mRecipeAdapter = new RecipeAdapter(mRecipes, this);
             recyclerView.setAdapter(mRecipeAdapter);
 
