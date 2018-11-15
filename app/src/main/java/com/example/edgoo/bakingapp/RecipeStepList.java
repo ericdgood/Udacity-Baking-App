@@ -21,7 +21,6 @@ public class RecipeStepList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobile_recipe_step_list);
-        ButterKnife.bind(this);
 
         setTitle(getIntent().getStringExtra("recipe_name"));
         ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
@@ -30,23 +29,39 @@ public class RecipeStepList extends AppCompatActivity {
         ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
         ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
 
+        if (findViewById(R.id.recipe_step_list_frag) != null) {
+            // CREATES A NEW FRAGMENT FOR STEPS LIST
+            StepsListFragment stepsFragment = new StepsListFragment();
+
+            // Add the fragment to its container using a FragmentManager and a Transaction
+            FragmentManager fragmentManager = getSupportFragmentManager();
+
+            stepsFragment.StepsList(this, stepId, shortDescription);
+            fragmentManager.beginTransaction()
+                    .add(R.id.recipe_step_list_frag, stepsFragment)
+                    .commit();
+            
+        } else {
+
+            ButterKnife.bind(this);
 //        RECYCLERVIEW FOR INGREDIENTS
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+            recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
-        recyclerView.setAdapter(mRecipeIngredientsListAdapter);
+            RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
+            recyclerView.setAdapter(mRecipeIngredientsListAdapter);
 
-        // CREATES A NEW FRAGMENT FOR STEPS LIST
-        StepsListFragment stepsFragment = new StepsListFragment();
+            // CREATES A NEW FRAGMENT FOR STEPS LIST
+            StepsListFragment stepsFragment = new StepsListFragment();
 
-        // Add the fragment to its container using a FragmentManager and a Transaction
-        FragmentManager fragmentManager = getSupportFragmentManager();
+            // Add the fragment to its container using a FragmentManager and a Transaction
+            FragmentManager fragmentManager = getSupportFragmentManager();
 
-        stepsFragment.StepsList(this, stepId, shortDescription);
-        fragmentManager.beginTransaction()
-                .add(R.id.recipe_step_list_frag, stepsFragment)
-                .commit();
+            stepsFragment.StepsList(this, stepId, shortDescription);
+            fragmentManager.beginTransaction()
+                    .add(R.id.recipe_step_list_frag, stepsFragment)
+                    .commit();
 
+        }
     }
 
 }
