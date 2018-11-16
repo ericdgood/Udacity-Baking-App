@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
@@ -19,6 +20,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.edgoo.bakingapp.Fragments.StepVideoDescripFrag;
+import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -45,28 +48,20 @@ import butterknife.ButterKnife;
 import static com.example.edgoo.bakingapp.RecipeAdapter.thumbUrl;
 import static com.example.edgoo.bakingapp.RecipeAdapter.videoUrl;
 
-public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener {
+public class RecipeStep extends AppCompatActivity {
 
-    @BindView(R.id.step_description)
-    TextView description;
     @BindView(R.id.previous_step)
     ImageButton previousStep;
     @BindView(R.id.next_step)
     ImageButton nextStep;
-    @BindView(R.id.no_video)
-    RelativeLayout noVideo;
     int currentStepDisplay;
     int arrayListSize;
-    //    EXOPLAYER
     private SimpleExoPlayer mExoPlayer;
-    @BindView(R.id.playerView)
-    SimpleExoPlayerView mPlayerView;
-    private String TAG;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//          CHECK IF ORIENTATION IS VERTICAL.
+//          DO THIS IF VERTICAL.
         if (this.getResources().getConfiguration().orientation !=
                 Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -80,36 +75,38 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             int step_id = Integer.parseInt(getIntent().getStringExtra("step_id"));
             currentStepDisplay = step_id;
             setTitle("Step " + String.valueOf(step_id));
-            getURL(videoUrl, thumbUrl, step_id);
 
-//        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS
-            description.setText((CharSequence) descriptionsArray.get(step_id));
+            StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            stepVideoFragment.VideoFragPass(this, videoUrl, thumbUrl, step_id);
+            fragmentManager.beginTransaction()
+                    .add(R.id.step_video_descrip_frag, stepVideoFragment)
+                    .commit();
 
             nextStep.setOnClickListener(v -> {
                 if (currentStepDisplay < arrayListSize) {
                     currentStepDisplay = currentStepDisplay + 1;
-                    description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
 
-                    mExoPlayer.stop();
+//                    mExoPlayer.stop();
                     Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
                     nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
                     finish();
                     startActivity(nextStepIntent);
                 }
             });
-
-            previousStep.setOnClickListener(v -> {
-                if (currentStepDisplay >= 1) {
-                    currentStepDisplay = currentStepDisplay - 1;
-                    description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
-
-                    mExoPlayer.stop();
-                    Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
-                    nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
-                    finish();
-                    startActivity(nextStepIntent);
-                }
-            });
+//
+//            previousStep.setOnClickListener(v -> {
+//                if (currentStepDisplay >= 1) {
+//                    currentStepDisplay = currentStepDisplay - 1;
+//                    description.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+//
+//                    mExoPlayer.stop();
+//                    Intent nextStepIntent = new Intent(RecipeStep.this, RecipeStep.class);
+//                    nextStepIntent.putExtra("step_id", String.valueOf(currentStepDisplay));
+//                    finish();
+//                    startActivity(nextStepIntent);
+//                }
+//            });
         }
 //            DO THIS IF ORIENTATION IS LANDSCAPE
         else {
@@ -119,74 +116,16 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             int step_id = Integer.parseInt(getIntent().getStringExtra("step_id"));
             setTitle("Step " + String.valueOf(step_id));
 
-            getURL(videoUrl, thumbUrl, step_id);
+            StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            stepVideoFragment.VideoFragPass(this, videoUrl, thumbUrl, step_id);
+            fragmentManager.beginTransaction()
+                    .add(R.id.recipe_step_list_frag, stepVideoFragment)
+                    .commit();
+
         }
     }
 
-        private void getURL (ArrayList videoUrl, ArrayList thumbUrl,int step_id){
-            //        GETS VIDEO AND SENDS TO EXO PLAYER
-            if (!String.valueOf(videoUrl.get(step_id)).equals("")) {
-                initializePlayer(Uri.parse(String.valueOf(videoUrl.get(step_id))));
-            } else if (!String.valueOf(thumbUrl.get(step_id)).equals("")) {
-                initializePlayer(Uri.parse(String.valueOf(thumbUrl.get(step_id))));
-            } else {
-                RelativeLayout noVideo = findViewById(R.id.no_video);
-                SimpleExoPlayerView mPlayerView = findViewById(R.id.playerView);
-                noVideo.setVisibility(View.VISIBLE);
-                initializePlayer(Uri.parse(""));
-                mPlayerView.setVisibility(View.INVISIBLE);
-            }
-        }
 
-        private void initializePlayer (Uri mediaUri){
-            SimpleExoPlayerView mPlayerView = findViewById(R.id.playerView);
-            if (mExoPlayer == null) {
-                // Create an instance of the ExoPlayer.
-                TrackSelector trackSelector = new DefaultTrackSelector();
-                LoadControl loadControl = new DefaultLoadControl();
-                mExoPlayer = ExoPlayerFactory.newSimpleInstance(this, trackSelector, loadControl);
-                mPlayerView.setPlayer(mExoPlayer);
-
-                // Set the ExoPlayer.EventListener to this activity.
-                mExoPlayer.addListener(this);
-
-                // Prepare the MediaSource.
-                String userAgent = Util.getUserAgent(this, "ClassicalMusicQuiz");
-                MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
-                        this, userAgent), new DefaultExtractorsFactory(), null, null);
-                mExoPlayer.prepare(mediaSource);
-                mExoPlayer.setPlayWhenReady(true);
-            }
-        }
-
-        @Override
-        public void onTimelineChanged (Timeline timeline, Object manifest){
-//      LEAVE BLANK
-        }
-
-        @Override
-        public void onTracksChanged (TrackGroupArray trackGroups, TrackSelectionArray
-        trackSelections){
-//      LEAVE BLANK
-        }
-
-        @Override
-        public void onLoadingChanged ( boolean isLoading){
-//      LEAVE BLANK
-        }
-
-        @Override
-        public void onPlayerStateChanged ( boolean playWhenReady, int playbackState){
-        }
-
-        @Override
-        public void onPlayerError (ExoPlaybackException error){
-//      LEAVE BLANK
-        }
-
-        @Override
-        public void onPositionDiscontinuity () {
-//      LEAVE BLANK
-        }
 }
 

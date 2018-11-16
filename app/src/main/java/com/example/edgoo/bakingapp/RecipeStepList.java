@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.edgoo.bakingapp.Fragments.StepVideoDescripFrag;
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 
 import java.util.ArrayList;
@@ -29,18 +30,26 @@ public class RecipeStepList extends AppCompatActivity {
         ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
         ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
 
-        if (findViewById(R.id.recipe_step_list_frag) != null) {
-            // CREATES A NEW FRAGMENT FOR STEPS LIST
+//        TABLET LAYOUT
+        if (findViewById(R.id.mobile_step_list) == null) {
+
+            final ArrayList videoUrl = RecipeAdapter.videoUrl;
+            final ArrayList thumbUrl = RecipeAdapter.thumbUrl;
+
+            StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
+            FragmentManager fragmentVideoManager = getSupportFragmentManager();
+            stepVideoFragment.VideoFragPass(this, videoUrl, thumbUrl, 0);
+            fragmentVideoManager.beginTransaction()
+                    .add(R.id.step_video_descrip_frag, stepVideoFragment)
+                    .commit();
+
             StepsListFragment stepsFragment = new StepsListFragment();
-
-            // Add the fragment to its container using a FragmentManager and a Transaction
             FragmentManager fragmentManager = getSupportFragmentManager();
-
             stepsFragment.StepsList(this, stepId, shortDescription);
             fragmentManager.beginTransaction()
                     .add(R.id.recipe_step_list_frag, stepsFragment)
                     .commit();
-            
+
         } else {
 
             ButterKnife.bind(this);

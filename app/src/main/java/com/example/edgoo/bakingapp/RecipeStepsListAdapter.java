@@ -51,6 +51,7 @@ public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsList
             viewHolder.shortDescription.setText((CharSequence) mShortDescription.get(i));
             
             viewHolder.recipeStepListLayout.setOnClickListener(new View.OnClickListener() {
+//                TODO: tab or mobile
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(mContext, RecipeStep.class);
