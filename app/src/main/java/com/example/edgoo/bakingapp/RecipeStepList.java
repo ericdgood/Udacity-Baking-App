@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
@@ -23,7 +24,7 @@ public class RecipeStepList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mobile_recipe_step_list);
 
-        setTitle(getIntent().getStringExtra("recipe_name"));
+        setTitle(RecipeAdapter.recipeName);
         ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
         ArrayList ingredientsQty = getIntent().getStringArrayListExtra("ingredients_qty");
         ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
@@ -35,14 +36,14 @@ public class RecipeStepList extends AppCompatActivity {
             FragmentManager fragmentVideoManager = getSupportFragmentManager();
             stepVideoFragment.VideoFragPass(this);
             fragmentVideoManager.beginTransaction()
-                    .add(R.id.step_video_descrip_frag, stepVideoFragment)
+                    .replace(R.id.step_video_descrip_frag, stepVideoFragment)
                     .commit();
 
             StepsListFragment stepsFragment = new StepsListFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
             stepsFragment.StepsList(this);
             fragmentManager.beginTransaction()
-                    .add(R.id.recipe_step_list_frag, stepsFragment)
+                    .replace(R.id.recipe_step_list_frag, stepsFragment)
                     .commit();
 
         } else {
@@ -66,6 +67,14 @@ public class RecipeStepList extends AppCompatActivity {
                     .commit();
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+
+        finish();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 
 }
