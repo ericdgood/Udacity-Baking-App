@@ -4,35 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.google.android.exoplayer2.ui.SimpleExoPlayerView
-        android:id="@+id/playerView"
+    <FrameLayout
+        android:id="@+id/step_video_descrip_frag"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content" />
 
-    <RelativeLayout
-        android:id="@+id/no_video"
-        android:layout_width="match_parent"
-        android:layout_height="270dp"
-        android:visibility="gone">
-
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/baking_clipart_2"
-            android:paddingTop="40dp"
-            android:paddingBottom="10dp"
-            android:contentDescription="@string/logo"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/sorry_no_video"
-            android:textSize="24sp"
-            android:textAlignment="center"
-            android:paddingBottom="10dp"
-            android:textColor="@color/black"/>
-
-
-    </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,25 +36,26 @@ import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 
+import static android.content.ContentValues.TAG;
+
 public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventListener {
 
     //    EXOPLAYER
-    private SimpleExoPlayer mExoPlayer;
-    private ArrayList mVideoUrl;
-    private ArrayList mThumbUrl;
+    public  SimpleExoPlayer mExoPlayer;
     private int mStep_id;
     private Context mContext;
 
 
-    public void VideoFragPass(Context context, ArrayList videoUrl, ArrayList thumbUrl, int step_id){
-        mVideoUrl = videoUrl;
-        mThumbUrl = thumbUrl;
+    public void VideoFragPass(Context context, int step_id){
         mStep_id = step_id;
         this.mContext = context;
     }
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+        final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
+        final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
 
         View rootView = inflater.inflate(R.layout.recipe_video_descrip_frag, container, false);
 
@@ -93,7 +95,7 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
             mExoPlayer.addListener(this);
 
             // Prepare the MediaSource.
-            String userAgent = Util.getUserAgent(mContext, "ClassicalMusicQuiz");
+            String userAgent = Util.getUserAgent(mContext, "bakingApp");
             MediaSource mediaSource = new ExtractorMediaSource(mediaUri, new DefaultDataSourceFactory(
                     mContext, userAgent), new DefaultExtractorsFactory(), null, null);
             mExoPlayer.prepare(mediaSource);

@@ -33,12 +33,9 @@ public class RecipeStepList extends AppCompatActivity {
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
 
-            final ArrayList videoUrl = RecipeAdapter.videoUrl;
-            final ArrayList thumbUrl = RecipeAdapter.thumbUrl;
-
             StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
             FragmentManager fragmentVideoManager = getSupportFragmentManager();
-            stepVideoFragment.VideoFragPass(this, videoUrl, thumbUrl, 0);
+            stepVideoFragment.VideoFragPass(this, 0);
             fragmentVideoManager.beginTransaction()
                     .add(R.id.step_video_descrip_frag, stepVideoFragment)
                     .commit();
