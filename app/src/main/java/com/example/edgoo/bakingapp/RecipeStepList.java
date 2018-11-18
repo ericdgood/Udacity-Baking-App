@@ -18,6 +18,7 @@ import butterknife.ButterKnife;
 public class RecipeStepList extends AppCompatActivity {
 
     @BindView(R.id.recycler_view_ingred) RecyclerView recyclerView;
+    StepVideoDescripFrag stepVideoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,19 +33,8 @@ public class RecipeStepList extends AppCompatActivity {
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
 
-            StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
-            FragmentManager fragmentVideoManager = getSupportFragmentManager();
-            stepVideoFragment.VideoFragPass(this);
-            fragmentVideoManager.beginTransaction()
-                    .replace(R.id.step_video_descrip_frag, stepVideoFragment)
-                    .commit();
-
-            StepsListFragment stepsFragment = new StepsListFragment();
-            FragmentManager fragmentManager = getSupportFragmentManager();
-            stepsFragment.StepsList(this);
-            fragmentManager.beginTransaction()
-                    .replace(R.id.recipe_step_list_frag, stepsFragment)
-                    .commit();
+            Intent intent = new Intent(this, RecipeStep.class);
+            this.startActivity(intent);
 
         } else {
 
@@ -68,13 +58,4 @@ public class RecipeStepList extends AppCompatActivity {
 
         }
     }
-
-    @Override
-    public void onBackPressed() {
-
-        finish();
-        Intent intent = new Intent(this, MainActivity.class);
-        startActivity(intent);
-    }
-
 }

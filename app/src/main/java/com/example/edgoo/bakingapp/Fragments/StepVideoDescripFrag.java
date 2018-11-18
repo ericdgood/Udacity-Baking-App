@@ -5,7 +5,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +13,6 @@ import android.widget.TextView;
 
 import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
-import com.example.edgoo.bakingapp.RecipeStep;
-import com.example.edgoo.bakingapp.RecipeStepList;
 import com.example.edgoo.bakingapp.RecipeStepsListAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
@@ -36,8 +33,6 @@ import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventListener {
 
@@ -67,7 +62,7 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
             }
         }
 
-        View rootView = inflater.inflate(R.layout.recipe_video_descrip_frag, container, false);
+        View rootView = inflater.inflate(R.layout.video_layout, container, false);
 
         ArrayList descriptionsArray = RecipeAdapter.description;
 //        GETS STEP FROM ARRAY WITH STEPID AND DISPLAYS

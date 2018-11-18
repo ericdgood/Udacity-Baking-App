@@ -1,10 +1,12 @@
 package com.example.edgoo.bakingapp;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.app.FragmentManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.edgoo.bakingapp.Fragments.StepVideoDescripFrag;
 import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import java.util.ArrayList;
@@ -50,15 +53,12 @@ public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsList
         public void onBindViewHolder(@NonNull RecipeStepsListAdapter.ViewHolder viewHolder, final int i) {
             viewHolder.stepId.setText((CharSequence) mStepId.get(i));
             viewHolder.shortDescription.setText((CharSequence) mShortDescription.get(i));
-            
-            viewHolder.recipeStepListLayout.setOnClickListener(new View.OnClickListener() {
-//                TODO: tab or mobile
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent(mContext, RecipeStepList.class);
-                    step_id = (CharSequence) ((CharSequence) mStepId.get(i));
-                    mContext.startActivity(intent);
-                }
+
+            viewHolder.recipeStepListLayout.setOnClickListener(v -> {
+                Intent inent = new Intent(mContext, RecipeStep.class);
+                step_id = (CharSequence) ((CharSequence) mStepId.get(i));
+                mContext.startActivity(inent);
+                ((Activity)mContext).finish();
             });
         }
 
