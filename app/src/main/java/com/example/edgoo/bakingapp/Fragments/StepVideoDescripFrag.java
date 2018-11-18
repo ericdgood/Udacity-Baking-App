@@ -51,7 +51,7 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
 
         final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
         final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
-        final CharSequence step_id_text = RecipeStepsListAdapter.step_id;
+        final CharSequence step_id_text = (CharSequence) RecipeStepsListAdapter.step_id;
         if (step_id_text == null) {
             mStep_id = 0;
         } else {

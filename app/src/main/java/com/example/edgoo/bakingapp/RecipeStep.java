@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -7,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -32,11 +34,13 @@ import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
+import java.net.Inet4Address;
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+import static com.example.edgoo.bakingapp.RecipeAdapter.step_id;
 import static com.example.edgoo.bakingapp.RecipeAdapter.thumbUrl;
 import static com.example.edgoo.bakingapp.RecipeAdapter.videoUrl;
 
@@ -46,24 +50,19 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     ImageButton previousStep;
     @BindView(R.id.next_step)
     ImageButton nextStep;
-    @BindView(R.id.step_description)
-    TextView descrip;
     int currentStepDisplay;
     int arrayListSize;
     private SimpleExoPlayer mExoPlayer;
-    @BindView(R.id.playerView)
-    SimpleExoPlayerView mPlayerView;
 
-    private int mStep_id;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        ArrayList descriptionsArray = RecipeAdapter.description;
+        final ArrayList descriptionsArray = RecipeAdapter.description;
         final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
         final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
-        final CharSequence step_id = RecipeStepsListAdapter.step_id;
+        final CharSequence step_id = (CharSequence) RecipeStepsListAdapter.step_id;
         if (step_id == null) {
             currentStepDisplay = 0;
         } else {
@@ -122,8 +121,9 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             setContentView(R.layout.recipe_step);
             setTitle("Step " + String.valueOf(currentStepDisplay));
 
-//            descrip.setText((CharSequence) descriptionsArray.get(0));
-            getURL(mVideoUrl, mThumbUrl,0);
+            TextView descrip = findViewById(R.id.step_description);
+            descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+            getURL(mVideoUrl, mThumbUrl,currentStepDisplay);
 
             StepsListFragment stepsFragment = new StepsListFragment();
             FragmentManager fragmentIngredManager = getSupportFragmentManager();
@@ -136,6 +136,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     }
 
     private void initializePlayer(Uri mediaUri) {
+        SimpleExoPlayerView mPlayerView = findViewById(R.id.playerView);
         if (mExoPlayer == null) {
             // Create an instance of the ExoPlayer.
             TrackSelector trackSelector = new DefaultTrackSelector();
@@ -198,6 +199,19 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     @Override
     public void onPositionDiscontinuity() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent home = new  Intent (this, MainActivity.class);
+        startActivity(home);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mExoPlayer.stop();
     }
 }
 
