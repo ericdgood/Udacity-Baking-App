@@ -16,6 +16,7 @@ import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
 import com.example.edgoo.bakingapp.RecipeStep;
 import com.example.edgoo.bakingapp.RecipeStepList;
+import com.example.edgoo.bakingapp.RecipeStepsListAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
 import com.google.android.exoplayer2.ExoPlaybackException;
 import com.google.android.exoplayer2.ExoPlayer;
@@ -41,13 +42,12 @@ import static android.content.ContentValues.TAG;
 public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventListener {
 
     //    EXOPLAYER
-    public  SimpleExoPlayer mExoPlayer;
-    private int mStep_id;
+    public SimpleExoPlayer mExoPlayer;
     private Context mContext;
+    private int mStep_id;
 
 
-    public void VideoFragPass(Context context, int step_id){
-        mStep_id = step_id;
+    public void VideoFragPass(Context context) {
         this.mContext = context;
     }
 
@@ -56,6 +56,16 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
 
         final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
         final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
+        final CharSequence step_id_text = RecipeStepsListAdapter.step_id;
+        if (step_id_text == null) {
+            mStep_id = 0;
+        } else {
+            try {
+                mStep_id = Integer.parseInt(step_id_text.toString());
+            } catch (NumberFormatException nfe) {
+                System.out.println("Could not parse " + nfe);
+            }
+        }
 
         View rootView = inflater.inflate(R.layout.recipe_video_descrip_frag, container, false);
 
@@ -82,13 +92,13 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
         return rootView;
     }
 
-    private void initializePlayer(View rootView, Uri mediaUri){
+    private void initializePlayer(View rootView, Uri mediaUri) {
         SimpleExoPlayerView mPlayerView = rootView.findViewById(R.id.playerView);
         if (mExoPlayer == null) {
             // Create an instance of the ExoPlayer.
             TrackSelector trackSelector = new DefaultTrackSelector();
             LoadControl loadControl = new DefaultLoadControl();
-            mExoPlayer = ExoPlayerFactory.newSimpleInstance( mContext, trackSelector, loadControl);
+            mExoPlayer = ExoPlayerFactory.newSimpleInstance(mContext, trackSelector, loadControl);
             mPlayerView.setPlayer(mExoPlayer);
 
             // Set the ExoPlayer.EventListener to this activity.
@@ -104,32 +114,32 @@ public class StepVideoDescripFrag extends Fragment implements ExoPlayer.EventLis
     }
 
     @Override
-    public void onTimelineChanged (Timeline timeline, Object manifest){
+    public void onTimelineChanged(Timeline timeline, Object manifest) {
 //      LEAVE BLANK
     }
 
     @Override
-    public void onTracksChanged (TrackGroupArray trackGroups, TrackSelectionArray
-            trackSelections){
+    public void onTracksChanged(TrackGroupArray trackGroups, TrackSelectionArray
+            trackSelections) {
 //      LEAVE BLANK
     }
 
     @Override
-    public void onLoadingChanged ( boolean isLoading){
+    public void onLoadingChanged(boolean isLoading) {
 //      LEAVE BLANK
     }
 
     @Override
-    public void onPlayerStateChanged ( boolean playWhenReady, int playbackState){
+    public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
     }
 
     @Override
-    public void onPlayerError (ExoPlaybackException error){
+    public void onPlayerError(ExoPlaybackException error) {
 //      LEAVE BLANK
     }
 
     @Override
-    public void onPositionDiscontinuity () {
+    public void onPositionDiscontinuity() {
 //      LEAVE BLANK
     }
 

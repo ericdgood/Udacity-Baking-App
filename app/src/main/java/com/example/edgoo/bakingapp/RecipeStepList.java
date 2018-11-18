@@ -27,22 +27,20 @@ public class RecipeStepList extends AppCompatActivity {
         ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
         ArrayList ingredientsQty = getIntent().getStringArrayListExtra("ingredients_qty");
         ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
-        ArrayList stepId = getIntent().getStringArrayListExtra("step_id");
-        ArrayList shortDescription = getIntent().getStringArrayListExtra("short_description");
 
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
 
             StepVideoDescripFrag stepVideoFragment = new StepVideoDescripFrag();
             FragmentManager fragmentVideoManager = getSupportFragmentManager();
-            stepVideoFragment.VideoFragPass(this, 0);
+            stepVideoFragment.VideoFragPass(this);
             fragmentVideoManager.beginTransaction()
                     .add(R.id.step_video_descrip_frag, stepVideoFragment)
                     .commit();
 
             StepsListFragment stepsFragment = new StepsListFragment();
             FragmentManager fragmentManager = getSupportFragmentManager();
-            stepsFragment.StepsList(this, stepId, shortDescription);
+            stepsFragment.StepsList(this);
             fragmentManager.beginTransaction()
                     .add(R.id.recipe_step_list_frag, stepsFragment)
                     .commit();
@@ -62,7 +60,7 @@ public class RecipeStepList extends AppCompatActivity {
             // Add the fragment to its container using a FragmentManager and a Transaction
             FragmentManager fragmentManager = getSupportFragmentManager();
 
-            stepsFragment.StepsList(this, stepId, shortDescription);
+            stepsFragment.StepsList(this);
             fragmentManager.beginTransaction()
                     .add(R.id.recipe_step_list_frag, stepsFragment)
                     .commit();

@@ -27,9 +27,10 @@ public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsList
     private Context mContext;
     private ArrayList mStepId;
     private ArrayList mShortDescription;
+    public static CharSequence step_id;
 
-    public RecipeStepsListAdapter(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription) {
-        this.mContext = recipeStepList;
+    public RecipeStepsListAdapter(Context context, ArrayList stepId, ArrayList shortDescription) {
+        this.mContext = context;
         this.mStepId = stepId;
         this.mShortDescription = shortDescription;
     }
@@ -54,9 +55,8 @@ public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsList
 //                TODO: tab or mobile
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(mContext, RecipeStep.class);
-                    CharSequence step_id = ((CharSequence) mStepId.get(i));
-                    intent.putExtra("step_id", step_id);
+                    Intent intent = new Intent(mContext, RecipeStepList.class);
+                    step_id = (CharSequence) ((CharSequence) mStepId.get(i));
                     mContext.startActivity(intent);
                 }
             });

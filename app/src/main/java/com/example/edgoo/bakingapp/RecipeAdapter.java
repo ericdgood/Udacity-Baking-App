@@ -25,6 +25,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     public static ArrayList description;
     public static ArrayList videoUrl;
     public static ArrayList thumbUrl;
+    public static ArrayList shortDescrip;
+    public static ArrayList step_id;
 
     RecipeAdapter(Recipes[] mRecipes, Context mContext) {
         this.mRecipes = mRecipes;
@@ -56,13 +58,13 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
                 intent.putExtra("ingredients", mRecipes[i].getRecipeIngredient());
                 intent.putExtra("ingredients_qty", mRecipes[i].getIngredientQuantity());
                 intent.putExtra("ingredients_measure", mRecipes[i].getIngredientMeasure());
-                intent.putExtra("step_id", mRecipes[i].getStepId());
-                intent.putExtra("short_description", mRecipes[i].getShortDescription());
                 mContext.startActivity(intent);
 
                 description = (mRecipes[i].getDescription());
                 videoUrl = (mRecipes[i].getVideoUrl());
                 thumbUrl = (mRecipes[i].getThumbnilUrl());
+                shortDescrip = (mRecipes[i].getShortDescription());
+                step_id = (mRecipes[i].getStepId());
             }
         });
 

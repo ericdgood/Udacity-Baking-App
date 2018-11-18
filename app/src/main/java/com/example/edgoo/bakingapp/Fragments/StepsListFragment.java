@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp.Fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.example.edgoo.bakingapp.R;
+import com.example.edgoo.bakingapp.RecipeAdapter;
 import com.example.edgoo.bakingapp.RecipeStepList;
 import com.example.edgoo.bakingapp.RecipeStepsListAdapter;
 
@@ -20,15 +22,11 @@ import butterknife.BindView;
 
 public class StepsListFragment extends Fragment {
 
-    ArrayList mStep_id;
-    ArrayList mShortDescription;
-    private RecipeStepList mRecipeStepList;
+    private Context mContext;
 
 
-    public void StepsList(RecipeStepList recipeStepList, ArrayList stepId, ArrayList shortDescription) {
-        mRecipeStepList = recipeStepList;
-        mStep_id = stepId;
-        mShortDescription = shortDescription;
+    public void StepsList(Context context) {
+        this.mContext = context;
     }
 
     public StepsListFragment() {
@@ -37,13 +35,17 @@ public class StepsListFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+
+        final ArrayList mShortDescription = RecipeAdapter.shortDescrip;
+        final ArrayList mStep_id = RecipeAdapter.step_id;
+
         View rootView = inflater.inflate(R.layout.recyclerview, container, false);
         RecyclerView recyclerStepView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
 
         //        RECYCLERVIEW FOR STEPS
         recyclerStepView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(mRecipeStepList, mStep_id, mShortDescription);
+        RecipeStepsListAdapter mRecipeStepsListAdapter = new RecipeStepsListAdapter(mContext, mStep_id, mShortDescription);
         recyclerStepView.setAdapter(mRecipeStepsListAdapter);
 
         // Return the rootView
