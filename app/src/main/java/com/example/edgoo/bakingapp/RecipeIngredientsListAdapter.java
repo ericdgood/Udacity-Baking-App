@@ -15,14 +15,11 @@ import butterknife.ButterKnife;
 
 public class RecipeIngredientsListAdapter extends RecyclerView.Adapter<RecipeIngredientsListAdapter.ViewHolder> {
 
-    private ArrayList mIngredientsList;
-    private ArrayList mIngredientsQtyList;
-    private ArrayList mIngredientsMeasureList;
+    private final ArrayList ingredients = RecipeAdapter.ingredients;
+    private final ArrayList ingredientsQty = RecipeAdapter.ingredients_qty;
+    private final ArrayList ingredientsMeasure = RecipeAdapter.ingredients_measure;
 
-    RecipeIngredientsListAdapter(ArrayList ingredientsList, ArrayList ingredientsQty, ArrayList ingredientsMeasure) {
-        this.mIngredientsList = ingredientsList;
-        this.mIngredientsQtyList = ingredientsQty;
-        this.mIngredientsMeasureList = ingredientsMeasure;
+    RecipeIngredientsListAdapter() {
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -38,9 +35,9 @@ public class RecipeIngredientsListAdapter extends RecyclerView.Adapter<RecipeIng
 
     @Override
     public void onBindViewHolder(@NonNull RecipeIngredientsListAdapter.ViewHolder viewHolder, int i) {
-        viewHolder.ingredientName.setText((CharSequence) mIngredientsList.get(i));
-        viewHolder.ingredientQty.setText((CharSequence) mIngredientsQtyList.get(i));
-        viewHolder.ingredientMeasure.setText((CharSequence) mIngredientsMeasureList.get(i));
+        viewHolder.ingredientName.setText((CharSequence) ingredients.get(i));
+        viewHolder.ingredientQty.setText((CharSequence) ingredientsQty.get(i));
+        viewHolder.ingredientMeasure.setText((CharSequence) ingredientsMeasure.get(i));
         }
 
     @NonNull
@@ -52,7 +49,7 @@ public class RecipeIngredientsListAdapter extends RecyclerView.Adapter<RecipeIng
 
     @Override
     public int getItemCount() {
-        if (null == mIngredientsList) return 0;
-        return mIngredientsList.size();
+        if (null == ingredients) return 0;
+        return ingredients.size();
     }
 }

@@ -49,6 +49,7 @@ public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsList
                 CharSequence step_id = ((CharSequence) mStepId.get(i));
                 intent.putExtra("step_id", step_id);
                 mContext.startActivity(intent);
+                ((Activity)mContext).finish();
             });
         }
 

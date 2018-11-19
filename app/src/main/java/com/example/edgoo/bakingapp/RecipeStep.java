@@ -191,5 +191,18 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         super.onDestroy();
         mExoPlayer.stop();
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        if (findViewById(R.id.recipe_step_list_frag) != null){
+            Intent back = new Intent(this, MainActivity.class);
+            startActivity(back);
+        } else {
+            Intent back = new Intent(this, RecipeStepList.class);
+            startActivity(back);
+        }
+    }
 }
 

@@ -24,9 +24,6 @@ public class RecipeStepList extends AppCompatActivity {
         setContentView(R.layout.mobile_recipe_step_list);
 
         setTitle(RecipeAdapter.recipeName);
-        ArrayList ingredients = getIntent().getStringArrayListExtra("ingredients");
-        ArrayList ingredientsQty = getIntent().getStringArrayListExtra("ingredients_qty");
-        ArrayList ingredientsMeasure = getIntent().getStringArrayListExtra("ingredients_measure");
 
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
@@ -40,7 +37,7 @@ public class RecipeStepList extends AppCompatActivity {
 //        RECYCLERVIEW FOR INGREDIENTS
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-            RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter(ingredients, ingredientsQty, ingredientsMeasure);
+            RecipeIngredientsListAdapter mRecipeIngredientsListAdapter = new RecipeIngredientsListAdapter();
             recyclerView.setAdapter(mRecipeIngredientsListAdapter);
 
             // CREATES A NEW FRAGMENT FOR STEPS LIST
