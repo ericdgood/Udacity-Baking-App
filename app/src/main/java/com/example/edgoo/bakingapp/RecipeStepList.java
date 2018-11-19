@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
-import com.example.edgoo.bakingapp.Fragments.StepVideoDescripFrag;
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 
 import java.util.ArrayList;
@@ -18,7 +17,6 @@ import butterknife.ButterKnife;
 public class RecipeStepList extends AppCompatActivity {
 
     @BindView(R.id.recycler_view_ingred) RecyclerView recyclerView;
-    StepVideoDescripFrag stepVideoFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
