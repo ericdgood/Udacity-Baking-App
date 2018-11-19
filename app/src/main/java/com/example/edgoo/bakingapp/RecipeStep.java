@@ -1,5 +1,6 @@
 package com.example.edgoo.bakingapp;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -77,6 +78,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                     mExoPlayer.stop();
                     Intent nextStep = new Intent(RecipeStep.this, RecipeStep.class);
                     nextStep.putExtra("step_id", String.valueOf(currentStepDisplay));
+                    finish();
                     startActivity(nextStep);
                 }
             });

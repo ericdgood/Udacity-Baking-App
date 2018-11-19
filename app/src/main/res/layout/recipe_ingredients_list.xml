@@ -37,15 +37,15 @@
         android:paddingRight="10dp"
         app:layout_constraintLeft_toRightOf="@id/ingredient_measure"/>
 
-
-<!--TODO: wrap text-->
     <TextView
         android:id="@+id/ingredient_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textSize="12sp"
         android:textColor="@color/black"
-        tools:text="Mascapone Cheese(room temperature)"
+        app:layout_constraintWidth_default="wrap"
+        tools:text="Mascapone Cheesesxxxxxxxxxxxxx(room temperature)"
         android:paddingTop="4dp"
         app:layout_constraintLeft_toRightOf="@id/dash"/>
 
