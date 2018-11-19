@@ -46,16 +46,4 @@
         </RelativeLayout>
 
 
-        <TextView
-            android:id="@+id/step_description"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:padding="7dp"
-            android:background="@drawable/border"
-            android:textSize="18sp"
-            tools:text="@string/test_step"
-            android:visibility="gone"
-            app:layout_constraintTop_toBottomOf="@id/playerView"/>
-
 </android.support.constraint.ConstraintLayout>

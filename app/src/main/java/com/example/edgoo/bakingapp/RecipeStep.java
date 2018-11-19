@@ -55,7 +55,11 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         final ArrayList descriptionsArray = RecipeAdapter.description;
         final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
         final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
-        currentStepDisplay = Integer.parseInt(getIntent().getStringExtra("step_id"));
+        if ((getIntent().getStringExtra("step_id")) != null) {
+            currentStepDisplay = Integer.parseInt(getIntent().getStringExtra("step_id"));
+        } else {
+            currentStepDisplay =0;
+        }
 
 //          DO THIS IF VERTICAL.
         if (this.getResources().getConfiguration().orientation !=
@@ -95,30 +99,24 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             });
         }
 //            DO THIS IF MOBILE ORIENTATION IS LANDSCAPE
-        else if (findViewById(R.id.mobile_landscape) == null){
-            setContentView(R.layout.recipe_step);
-            setTitle("Step " + String.valueOf(currentStepDisplay));
-
-            TextView descrip = findViewById(R.id.step_description);
-            descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
-            getURL(mVideoUrl, mThumbUrl,currentStepDisplay);
-
-        }
-//        DO THIS IF TABLET
         else {
             setContentView(R.layout.recipe_step);
             setTitle("Step " + String.valueOf(currentStepDisplay));
-
-            TextView descrip = findViewById(R.id.step_description);
-            descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
             getURL(mVideoUrl, mThumbUrl,currentStepDisplay);
 
-            StepsListFragment stepsFragment = new StepsListFragment();
-            FragmentManager fragmentIngredManager = getSupportFragmentManager();
-            stepsFragment.StepsList(this);
-            fragmentIngredManager.beginTransaction()
-                    .replace(R.id.recipe_step_list_frag, stepsFragment)
-                    .commit();
+            if (findViewById(R.id.recipe_step_list_frag) != null){
+
+                TextView descrip = findViewById(R.id.step_description);
+                descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+
+                StepsListFragment stepsFragment = new StepsListFragment();
+                FragmentManager fragmentIngredManager = getSupportFragmentManager();
+                stepsFragment.StepsList(this);
+                fragmentIngredManager.beginTransaction()
+                        .replace(R.id.recipe_step_list_frag, stepsFragment)
+                        .commit();
+            }
+
         }
     }
 
