@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -39,6 +40,7 @@ import butterknife.ButterKnife;
 
 public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener{
 
+    private static final String TAG = "test" ;
     @BindView(R.id.previous_step)
     ImageButton previousStep;
     @BindView(R.id.next_step)
@@ -53,6 +55,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
         super.onCreate(savedInstanceState);
 
         final ArrayList descriptionsArray = RecipeAdapter.description;
+        final String recipeName = RecipeAdapter.recipeName;
         final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
         final ArrayList mThumbUrl = RecipeAdapter.thumbUrl;
         if ((getIntent().getStringExtra("step_id")) != null) {
@@ -72,12 +75,10 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
             setTitle("Step " + String.valueOf(currentStepDisplay));
 
             TextView descrip = findViewById(R.id.step_description);
-            descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
-            getURL(mVideoUrl, mThumbUrl,currentStepDisplay);
 
             nextStep.setOnClickListener(v -> {
                 if (currentStepDisplay < arrayListSize) {
-                    currentStepDisplay = currentStepDisplay + 1 ;
+                    ++currentStepDisplay;
                     setTitle("Step " + String.valueOf(currentStepDisplay));
                     mExoPlayer.stop();
                     Intent nextStep = new Intent(RecipeStep.this, RecipeStep.class);
@@ -89,7 +90,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
 
             previousStep.setOnClickListener(v -> {
                 if (currentStepDisplay >= 1) {
-                    currentStepDisplay = currentStepDisplay - 1 ;
+                    --currentStepDisplay;
                     setTitle("Step " + String.valueOf(currentStepDisplay));
                     mExoPlayer.stop();
                     Intent nextStep = new Intent(RecipeStep.this, RecipeStep.class);
@@ -97,6 +98,12 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
                     startActivity(nextStep);
                 }
             });
+            if (recipeName.contains("Y") && currentStepDisplay >= 8) {
+                --currentStepDisplay;
+            }
+            descrip.setText((CharSequence) descriptionsArray.get(currentStepDisplay));
+            getURL(mVideoUrl, mThumbUrl, currentStepDisplay);
+
         }
 //            DO THIS IF MOBILE ORIENTATION IS LANDSCAPE
         else {
@@ -195,7 +202,7 @@ public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventList
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-
+        mExoPlayer.stop();
         if (findViewById(R.id.recipe_step_list_frag) != null){
             Intent back = new Intent(this, MainActivity.class);
             startActivity(back);

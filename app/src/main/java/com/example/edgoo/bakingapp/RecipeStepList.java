@@ -61,10 +61,6 @@ public class RecipeStepList extends AppCompatActivity {
     void startWidgetService()
     {
         Intent i = new Intent(this, WidgetUpdateService.class);
-//        Bundle bundle = new Bundle();
-//        bundle.putCharSequenceArrayList(MainActivity.INGREDIENTS, mIngredients);
-//        i.putExtra(MainActivity.BUNDLE, bundle);
-//        i.setAction(WidgetUpdateService.WIDGET_UPDATE_ACTION);
         startService(i);
     }
 }

@@ -5,14 +5,12 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 
 import com.example.edgoo.bakingapp.R;
 
 import java.util.ArrayList;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class BakingAppWidgetProvider extends AppWidgetProvider {
 

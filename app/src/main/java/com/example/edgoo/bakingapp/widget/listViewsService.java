@@ -8,19 +8,13 @@ import android.widget.RemoteViewsService;
 
 import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import java.util.ArrayList;
 
-import static android.support.constraint.Constraints.TAG;
 
 public class listViewsService extends RemoteViewsService
 {
 
-    /**
-     * @param intent intent that triggered this service
-     * @return new ListViewsFactory Object with the appropriate implementation
-     */
     public ListViewsFactory onGetViewFactory(Intent intent)
     {
         return new ListViewsFactory(this.getApplicationContext());

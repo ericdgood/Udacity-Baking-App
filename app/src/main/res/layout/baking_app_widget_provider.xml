@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="#09C"
+    android:background="@color/main_bkg"
     android:padding="@dimen/widget_margin"
     android:orientation="vertical">
 
@@ -13,9 +13,8 @@
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
         android:layout_margin="8dp"
-        android:background="#09C"
         android:text="@string/ingred_list_label"
-        android:textColor="#ffffff"
+        android:textColor="#000000"
         android:textSize="24sp"
         android:textStyle="bold|italic" />
 
