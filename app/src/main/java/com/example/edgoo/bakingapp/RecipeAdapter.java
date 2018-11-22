@@ -21,7 +21,7 @@ import butterknife.ButterKnife;
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder> {
 
     private Recipes[] mRecipes;
-    private Context mContext;
+    private final Context mContext;
     public static ArrayList description;
     public static ArrayList videoUrl;
     public static ArrayList thumbUrl;
@@ -53,23 +53,20 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
         viewHolder.itemName.setText(mRecipes[i].getRecipeItemName());
         viewHolder.itemServings.setText(mRecipes[i].getRecipeServings());
 
-        viewHolder.recipeImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        viewHolder.recipeImage.setOnClickListener(view -> {
 
-                Intent intent = new Intent(mContext, RecipeStepList.class);
-                mContext.startActivity(intent);
+            Intent intent = new Intent(mContext, RecipeStepList.class);
+            mContext.startActivity(intent);
 
-                description = (mRecipes[i].getDescription());
-                videoUrl = (mRecipes[i].getVideoUrl());
-                recipeName = (mRecipes[i].getRecipeItemName());
-                thumbUrl = (mRecipes[i].getThumbnilUrl());
-                shortDescrip = (mRecipes[i].getShortDescription());
-                step_id = (mRecipes[i].getStepId());
-                ingredients = (mRecipes[i].getRecipeIngredient());
-                ingredients_qty = (mRecipes[i].getIngredientQuantity());
-                ingredients_measure = (mRecipes[i].getIngredientMeasure());
-            }
+            description = (mRecipes[i].getDescription());
+            videoUrl = (mRecipes[i].getVideoUrl());
+            recipeName = (mRecipes[i].getRecipeItemName());
+            thumbUrl = (mRecipes[i].getThumbnilUrl());
+            shortDescrip = (mRecipes[i].getShortDescription());
+            step_id = (mRecipes[i].getStepId());
+            ingredients = (mRecipes[i].getRecipeIngredient());
+            ingredients_qty = (mRecipes[i].getIngredientQuantity());
+            ingredients_measure = (mRecipes[i].getIngredientMeasure());
         });
 
         switch (mRecipes[i].getRecipeId()) {

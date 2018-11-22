@@ -1,14 +1,10 @@
 package com.example.edgoo.bakingapp.RecipeData;
 
-import android.util.Log;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
-
-import static android.content.ContentValues.TAG;
 
 class ParseRecipeData {
 
@@ -28,9 +24,9 @@ class ParseRecipeData {
 
 //            PARSES INGREDIENTS ARRAY
             JSONArray ingredientsArray = currentRecipe.getJSONArray("ingredients");
-            ArrayList<String> ingredientsList = new ArrayList<String>();
-            ArrayList<String> ingredientsQtyList = new ArrayList<String>();
-            ArrayList<String> ingredientsMeasureList = new ArrayList<String>();
+            ArrayList<String> ingredientsList = new ArrayList<>();
+            ArrayList<String> ingredientsQtyList = new ArrayList<>();
+            ArrayList<String> ingredientsMeasureList = new ArrayList<>();
             for (int j = 0; j < ingredientsArray.length(); j++) {
 
                 JSONObject currentIngredients = ingredientsArray.getJSONObject(j);
@@ -45,11 +41,11 @@ class ParseRecipeData {
 
 //            PARSES INGREDIENTS ARRAY
             JSONArray stepsArray = currentRecipe.getJSONArray("steps");
-            ArrayList<String> stepId = new ArrayList<String>();
-            ArrayList<String> shortDescription = new ArrayList<String>();
-            ArrayList<String> description = new ArrayList<String>();
-            ArrayList<String> videoURL = new ArrayList<String>();
-            ArrayList<String> thumbnailURL = new ArrayList<String>();
+            ArrayList<String> stepId = new ArrayList<>();
+            ArrayList<String> shortDescription = new ArrayList<>();
+            ArrayList<String> description = new ArrayList<>();
+            ArrayList<String> videoURL = new ArrayList<>();
+            ArrayList<String> thumbnailURL = new ArrayList<>();
             for (int k = 0; k < stepsArray.length(); k++) {
 
                 JSONObject currentStep = stepsArray.getJSONObject(k);

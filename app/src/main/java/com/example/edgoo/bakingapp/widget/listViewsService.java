@@ -2,7 +2,6 @@ package com.example.edgoo.bakingapp.widget;
 
 import android.content.Context;
 import android.content.Intent;
-import android.util.Log;
 import android.widget.RemoteViews;
 import android.widget.RemoteViewsService;
 
@@ -23,7 +22,7 @@ public class listViewsService extends RemoteViewsService
 
 class ListViewsFactory implements RemoteViewsService.RemoteViewsFactory
 {
-    private Context mContext;
+    private final Context mContext;
     private ArrayList mIngredients = RecipeAdapter.ingredients;
 
     public ListViewsFactory(Context mContext)

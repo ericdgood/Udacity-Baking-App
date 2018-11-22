@@ -18,9 +18,9 @@ import butterknife.ButterKnife;
 
 public class RecipeStepsListAdapter extends RecyclerView.Adapter<RecipeStepsListAdapter.ViewHolder> {
 
-    private Context mContext;
-    private ArrayList mStepId;
-    private ArrayList mShortDescription;
+    private final Context mContext;
+    private final ArrayList mStepId;
+    private final ArrayList mShortDescription;
 
     public RecipeStepsListAdapter(Context context, ArrayList stepId, ArrayList shortDescription) {
         this.mContext = context;

@@ -87,7 +87,7 @@ public class Recipes implements Parcelable {
     }
 
 
-    public ArrayList<String> getRecipeIngredient() {
+    public ArrayList getRecipeIngredient() {
         return recipeIngredient;
     }
 
@@ -95,7 +95,7 @@ public class Recipes implements Parcelable {
         this.recipeIngredient = recipeIngredient;
     }
 
-    public ArrayList<String> getIngredientQuantity() {
+    public ArrayList getIngredientQuantity() {
         return ingredientQuantity;
     }
 
@@ -103,7 +103,7 @@ public class Recipes implements Parcelable {
         this.ingredientQuantity = ingredientQuantity;
     }
 
-    public ArrayList<String> getIngredientMeasure() {
+    public ArrayList getIngredientMeasure() {
         return ingredientMeasure;
     }
 

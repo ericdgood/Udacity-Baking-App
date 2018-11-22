@@ -37,14 +37,8 @@ public class BakingAppWidgetProvider extends AppWidgetProvider {
 
         }
 
-        @Override
-        public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
-        {
-            super.onUpdate(context, appWidgetManager, appWidgetIds);
-        }
 
-
-        @Override
+    @Override
         public void onEnabled(Context context)
         {
 

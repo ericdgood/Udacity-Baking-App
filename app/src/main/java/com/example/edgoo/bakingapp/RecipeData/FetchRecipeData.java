@@ -2,10 +2,7 @@ package com.example.edgoo.bakingapp.RecipeData;
 
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.util.Log;
-import android.view.View;
 
-import com.example.edgoo.bakingapp.BuildConfig;
 import com.example.edgoo.bakingapp.RecipeAdapter;
 
 import org.json.JSONException;
@@ -16,8 +13,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Scanner;
-
-import static android.content.ContentValues.TAG;
 
 public class FetchRecipeData extends AsyncTask<String, Void, Recipes[]> {
 

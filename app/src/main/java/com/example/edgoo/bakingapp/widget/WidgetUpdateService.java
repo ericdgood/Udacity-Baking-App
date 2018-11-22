@@ -4,19 +4,15 @@ import android.app.IntentService;
 import android.appwidget.AppWidgetManager;
 import android.content.ComponentName;
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.annotation.Nullable;
 
-import com.example.edgoo.bakingapp.MainActivity;
 import com.example.edgoo.bakingapp.RecipeAdapter;
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
 
 import java.util.ArrayList;
 
 public class WidgetUpdateService extends IntentService
 {
-    private ArrayList mIngredients = RecipeAdapter.ingredients;
+    private final ArrayList mIngredients = RecipeAdapter.ingredients;
 
     public WidgetUpdateService()
     {

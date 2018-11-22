@@ -9,16 +9,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
-import com.example.edgoo.bakingapp.RecipeStepList;
 import com.example.edgoo.bakingapp.RecipeStepsListAdapter;
 
 import java.util.ArrayList;
-
-import butterknife.BindView;
 
 public class StepsListFragment extends Fragment {
 
@@ -40,7 +36,7 @@ public class StepsListFragment extends Fragment {
         final ArrayList mStep_id = RecipeAdapter.step_id;
 
         View rootView = inflater.inflate(R.layout.recyclerview, container, false);
-        RecyclerView recyclerStepView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
+        RecyclerView recyclerStepView = rootView.findViewById(R.id.recycler_view);
 
         //        RECYCLERVIEW FOR STEPS
         recyclerStepView.setLayoutManager(new LinearLayoutManager(getActivity()));

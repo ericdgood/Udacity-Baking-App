@@ -18,8 +18,8 @@ import butterknife.ButterKnife;
 
 public class RecipeStepList extends AppCompatActivity {
 
-    @BindView(R.id.recycler_view_ingred) RecyclerView recyclerView;
-    private ArrayList mIngredients = RecipeAdapter.ingredients;
+    @BindView(R.id.recycler_view_ingred)
+    RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class RecipeStepList extends AppCompatActivity {
         }
     }
 
-    void startWidgetService()
+    private void startWidgetService()
     {
         Intent i = new Intent(this, WidgetUpdateService.class);
         startService(i);

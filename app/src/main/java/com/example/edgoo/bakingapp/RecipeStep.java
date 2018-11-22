@@ -1,6 +1,5 @@
 package com.example.edgoo.bakingapp;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.net.Uri;
@@ -8,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
@@ -41,13 +39,12 @@ import butterknife.ButterKnife;
 
 public class RecipeStep extends AppCompatActivity implements ExoPlayer.EventListener{
 
-    private static final String TAG = "test" ;
     @BindView(R.id.previous_step)
     ImageButton previousStep;
     @BindView(R.id.next_step)
     ImageButton nextStep;
-    int currentStepDisplay;
-    int arrayListSize;
+    private int currentStepDisplay;
+    private int arrayListSize;
     private SimpleExoPlayer mExoPlayer;
 
 
