@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity {
     private RecipeAdapter mRecipeAdapter;
     Recipes[] mRecipes;
     @BindView(R.id.recycler_view) RecyclerView recyclerView;
+    public static final String BUNDLE = "bundle";
+    public static final String INGREDIENTS = "ingredients";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

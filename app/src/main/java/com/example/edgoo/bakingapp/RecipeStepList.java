@@ -8,15 +8,18 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
+import com.example.edgoo.bakingapp.widget.WidgetUpdateService;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
+
 public class RecipeStepList extends AppCompatActivity {
 
     @BindView(R.id.recycler_view_ingred) RecyclerView recyclerView;
+    private ArrayList mIngredients = RecipeAdapter.ingredients;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +27,7 @@ public class RecipeStepList extends AppCompatActivity {
         setContentView(R.layout.mobile_recipe_step_list);
 
         setTitle(RecipeAdapter.recipeName);
+        startWidgetService();
 
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
@@ -52,5 +56,15 @@ public class RecipeStepList extends AppCompatActivity {
                     .commit();
 
         }
+    }
+
+    void startWidgetService()
+    {
+        Intent i = new Intent(this, WidgetUpdateService.class);
+//        Bundle bundle = new Bundle();
+//        bundle.putCharSequenceArrayList(MainActivity.INGREDIENTS, mIngredients);
+//        i.putExtra(MainActivity.BUNDLE, bundle);
+//        i.setAction(WidgetUpdateService.WIDGET_UPDATE_ACTION);
+        startService(i);
     }
 }
