@@ -61,7 +61,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
             description = (mRecipes[i].getDescription());
             videoUrl = (mRecipes[i].getVideoUrl());
             recipeName = (mRecipes[i].getRecipeItemName());
-            thumbUrl = (mRecipes[i].getThumbnilUrl());
             shortDescrip = (mRecipes[i].getShortDescription());
             step_id = (mRecipes[i].getStepId());
             ingredients = (mRecipes[i].getRecipeIngredient());

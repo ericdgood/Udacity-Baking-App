@@ -32,7 +32,7 @@ public class RecipeStepList extends AppCompatActivity {
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
 
-            Intent intent = new Intent(this, RecipeStep.class);
+            Intent intent = new Intent(this, StepDetailActivity.class);
             this.startActivity(intent);
 
         } else {
