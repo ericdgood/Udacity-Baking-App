@@ -6,6 +6,11 @@ import android.support.v4.app.FragmentManager;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 import com.example.edgoo.bakingapp.widget.WidgetUpdateService;
@@ -20,6 +25,8 @@ public class RecipeStepList extends AppCompatActivity {
 
     @BindView(R.id.recycler_view_ingred)
     RecyclerView recyclerView;
+    @BindView(R.id.recipe_name)
+    TextView recipeName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +34,7 @@ public class RecipeStepList extends AppCompatActivity {
         setContentView(R.layout.mobile_recipe_step_list);
 
         setTitle(RecipeAdapter.recipeName);
-        startWidgetService();
+//        startWidgetService();
 
 //        TABLET LAYOUT
         if (findViewById(R.id.mobile_step_list) == null) {
@@ -38,6 +45,8 @@ public class RecipeStepList extends AppCompatActivity {
         } else {
 
             ButterKnife.bind(this);
+            recipeName.setText(RecipeAdapter.recipeName);
+
 //        RECYCLERVIEW FOR INGREDIENTS
             recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -62,5 +71,23 @@ public class RecipeStepList extends AppCompatActivity {
     {
         Intent i = new Intent(this, WidgetUpdateService.class);
         startService(i);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.widget_add, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+//        boolean recipeAdded;
+        if (itemId == R.id.action_add) {
+            startWidgetService();
+            Toast.makeText(this, "Ingredients added to widget", Toast.LENGTH_SHORT).show();
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

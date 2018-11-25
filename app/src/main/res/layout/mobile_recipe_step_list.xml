@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    android:id="@+id/mobile_step_list"
+<ScrollView android:id="@+id/mobile_step_list"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -11,23 +11,48 @@
         android:orientation="vertical">
 
         <!--INFO TO SHOW(RECIPE INGREDIENTS, STEPS AND SHORT DESCRIPTION)-->
+<LinearLayout
+    android:id="@+id/title"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
 
         <TextView
             android:id="@+id/ingred_label"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="16dp"
+            android:layout_weight="1"
             android:text="@string/ingred_list_label"
             android:textAllCaps="true"
             android:textColor="@color/black"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/recipe_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            tools:text="recipe Name"
+            android:textAllCaps="true"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textStyle="bold|italic"/>
+
+</LinearLayout>
+
+        <View
+            android:id="@+id/dividline"
+            style="@style/Divider"
+            android:layout_below="@id/title"/>
 
         <!--RECIPE INGREDIENTS-->
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_ingred"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@id/ingred_label"/>
+            android:layout_below="@id/dividline"/>
 
         <View
             android:id="@+id/dividerline"

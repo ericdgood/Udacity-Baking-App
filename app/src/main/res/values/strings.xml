@@ -9,4 +9,5 @@
     <string name="previous_step">previous step</string>
     <string name="logo">logo</string>
     <string name="sorry_no_video">Sorry, No video</string>
+    <string name="add_to_widget">Add to widget</string>
 </resources>

@@ -2,7 +2,6 @@ package com.example.edgoo.bakingapp.Fragments;
 
 
 import android.content.Context;
-import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -10,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,19 +18,18 @@ import android.widget.TextView;
 import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
+import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
-import com.google.android.exoplayer2.trackselection.AdaptiveTrackSelection;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
-import com.google.android.exoplayer2.upstream.BandwidthMeter;
-import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
@@ -53,6 +50,9 @@ public class StepDetailFragment extends Fragment {
     SimpleExoPlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
     final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
+    boolean playWhenReady = false;
+    int currentWindow = 0;
+    long playbackPosition = 0;
 
     public StepDetailFragment() {}
 
@@ -122,8 +122,10 @@ public class StepDetailFragment extends Fragment {
     }
 
     private void releasePlayer() {
-        if (!mVideoUrl.get(mCurrentStep).equals("") && mExoPlayer != null) {
-            mExoPlayer.stop();
+        if (mExoPlayer != null) {
+            playbackPosition = mExoPlayer.getCurrentPosition();
+            currentWindow = mExoPlayer.getCurrentWindowIndex();
+            playWhenReady = mExoPlayer.getPlayWhenReady();
             mExoPlayer.release();
             mExoPlayer = null;
         }
@@ -142,7 +144,28 @@ public class StepDetailFragment extends Fragment {
             releasePlayer();
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if((mExoPlayer != null)&&(playWhenReady)){
+            mExoPlayer.setPlayWhenReady(true);
+        }
+    }
+
     public void setStepsModel(int currentStep) {
         this.mCurrentStep = currentStep;
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(mExoPlayer != null){
+            if(mExoPlayer.getPlayWhenReady()){
+                mExoPlayer.setPlayWhenReady(false);
+                playWhenReady = true;
+            }else{
+                playWhenReady = false;
+            }
+        }
     }
 }
