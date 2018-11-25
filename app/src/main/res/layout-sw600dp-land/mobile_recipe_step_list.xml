@@ -11,9 +11,4 @@
         tools:background="@color/colorAccent"
         android:layout_height="match_parent"/>
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        tools:background="@color/black"
-        android:layout_height="match_parent"/>
-
 </LinearLayout>

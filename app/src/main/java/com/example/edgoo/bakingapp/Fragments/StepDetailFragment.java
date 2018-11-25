@@ -18,7 +18,6 @@ import android.widget.TextView;
 import com.example.edgoo.bakingapp.R;
 import com.example.edgoo.bakingapp.RecipeAdapter;
 import com.google.android.exoplayer2.DefaultLoadControl;
-import com.google.android.exoplayer2.DefaultRenderersFactory;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.SimpleExoPlayer;
@@ -29,7 +28,6 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
-import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
 import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
@@ -49,10 +47,8 @@ public class StepDetailFragment extends Fragment {
     @BindView(R.id.playerView)
     SimpleExoPlayerView mPlayerView;
     private SimpleExoPlayer mExoPlayer;
-    final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
-    boolean playWhenReady = false;
-    int currentWindow = 0;
-    long playbackPosition = 0;
+    private final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
+    private boolean playWhenReady = false;
 
     public StepDetailFragment() {}
 
@@ -101,11 +97,6 @@ public class StepDetailFragment extends Fragment {
         return rootView;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
     private void initializePlayer(Uri mediaUri) {
         if (mExoPlayer == null) {
             TrackSelector trackSelector = new DefaultTrackSelector();
@@ -123,8 +114,6 @@ public class StepDetailFragment extends Fragment {
 
     private void releasePlayer() {
         if (mExoPlayer != null) {
-            playbackPosition = mExoPlayer.getCurrentPosition();
-            currentWindow = mExoPlayer.getCurrentWindowIndex();
             playWhenReady = mExoPlayer.getPlayWhenReady();
             mExoPlayer.release();
             mExoPlayer = null;

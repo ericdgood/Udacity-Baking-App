@@ -15,8 +15,6 @@ import android.widget.Toast;
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 import com.example.edgoo.bakingapp.widget.WidgetUpdateService;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

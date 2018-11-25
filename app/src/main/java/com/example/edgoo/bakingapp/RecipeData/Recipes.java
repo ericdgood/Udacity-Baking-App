@@ -154,10 +154,6 @@ public class Recipes implements Parcelable {
         this.videoUrl = videoUrl;
     }
 
-    public ArrayList getThumbnilUrl() {
-        return thumbnilUrl;
-    }
-
     public void setThumbnilUrl(ArrayList thumbnilUrl) {
         this.thumbnilUrl = thumbnilUrl;
     }

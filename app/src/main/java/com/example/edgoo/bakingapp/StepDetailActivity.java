@@ -12,8 +12,9 @@ import android.widget.Toast;
 
 import com.example.edgoo.bakingapp.Fragments.StepDetailFragment;
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
-import com.example.edgoo.bakingapp.RecipeData.Recipes;
 import com.example.edgoo.bakingapp.widget.WidgetUpdateService;
+
+import java.util.Objects;
 
 public class StepDetailActivity extends AppCompatActivity {
 
@@ -53,9 +54,9 @@ public class StepDetailActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if(newConfig.orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            getSupportActionBar().hide();
+            Objects.requireNonNull(getSupportActionBar()).hide();
         } else {
-            getSupportActionBar().show();
+            Objects.requireNonNull(getSupportActionBar()).show();
         }
     }
     @Override
