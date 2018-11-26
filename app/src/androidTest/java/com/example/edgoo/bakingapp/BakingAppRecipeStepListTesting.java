@@ -13,7 +13,7 @@ import static android.support.test.espresso.matcher.ViewMatchers.withId;
 import static android.support.test.espresso.matcher.ViewMatchers.withText;
 
 @RunWith(AndroidJUnit4.class)
-public class BakingAppTesting {
+public class BakingAppRecipeStepListTesting {
 
 
     @Rule
