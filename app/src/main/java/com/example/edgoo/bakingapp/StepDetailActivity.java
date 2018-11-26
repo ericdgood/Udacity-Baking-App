@@ -36,7 +36,7 @@ public class StepDetailActivity extends AppCompatActivity {
         StepDetailFragment stepDetailFragment = new StepDetailFragment();
         stepDetailFragment.setStepsModel(currentStepDisplay);
         getSupportFragmentManager().beginTransaction()
-                .add(R.id.step_detail_container, stepDetailFragment)
+                .replace(R.id.step_detail_container, stepDetailFragment)
                 .commit();
 
         if (findViewById(R.id.recipe_step_list_frag) != null) {
