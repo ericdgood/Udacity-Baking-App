@@ -10,15 +10,13 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.example.edgoo.bakingapp.Fragments.StepDetailFragment;
+import com.example.edgoo.bakingapp.Fragments.StepDetailFrag;
 import com.example.edgoo.bakingapp.Fragments.StepsListFragment;
 import com.example.edgoo.bakingapp.widget.WidgetUpdateService;
 
 import java.util.Objects;
 
 public class StepDetailActivity extends AppCompatActivity {
-
-    private int currentStepDisplay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +25,21 @@ public class StepDetailActivity extends AppCompatActivity {
 
         setTitle(RecipeAdapter.recipeName);
 
+        int currentStepDisplay;
         if ((getIntent().getStringExtra("step_id")) != null) {
             currentStepDisplay = Integer.parseInt(getIntent().getStringExtra("step_id"));
         } else {
             currentStepDisplay =0;
         }
 
-        StepDetailFragment stepDetailFragment = new StepDetailFragment();
-        stepDetailFragment.setStepsModel(currentStepDisplay);
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.step_detail_container, stepDetailFragment)
-                .commit();
+        if(savedInstanceState == null) {
+            StepDetailFrag stepDetailFragment = new StepDetailFrag();
+            stepDetailFragment.setArguments(getIntent().getExtras());
+            stepDetailFragment.setStepDetail(currentStepDisplay);
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.step_detail_container, stepDetailFragment)
+                    .commit();
+        }
 
         if (findViewById(R.id.recipe_step_list_frag) != null) {
 
