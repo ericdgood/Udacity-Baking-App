@@ -30,6 +30,7 @@ import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import java.util.ArrayList;
 
@@ -73,7 +74,6 @@ public class StepDetailFrag extends Fragment {
             }
 
                 final ArrayList descriptionsArray = RecipeAdapter.description;
-                final String recipeName = RecipeAdapter.recipeName;
                 final ArrayList mVideoUrl = RecipeAdapter.videoUrl;
 
                 if(savedInstanceState != null){
@@ -133,18 +133,18 @@ public class StepDetailFrag extends Fragment {
             }
         }
 
-        @Override
-        public void onPause() {
-            super.onPause();
-            if(player != null){
-                if(player.getPlayWhenReady()){
-                    player.setPlayWhenReady(false);
-                    playWhenReady = true;
-                }else{
-                    playWhenReady = false;
-                }
-            }
-        }
+//        @Override
+//        public void onPause() {
+//            super.onPause();
+//            if(player != null){
+//                if(player.getPlayWhenReady()){
+//                    player.setPlayWhenReady(false);
+//                    playWhenReady = true;
+//                }else{
+//                    playWhenReady = false;
+//                }
+//            }
+//        }
 
         @Override
         public void onDestroyView() {
@@ -178,6 +178,21 @@ public class StepDetailFrag extends Fragment {
             outState.putBoolean("playWhenReady",playWhenReady);
             outState.putLong("playbackPosition",player.getCurrentPosition());
         }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (player != null) {
+            pauseExoPlayerState();
+        }
+    }
+
+//    VIDEO IS RELEASED ON PAUSE
+    private void pauseExoPlayerState() {
+        playWhenReady = player.getPlayWhenReady();
+        playbackPosition = player.getCurrentPosition();
+        player.release();
+    }
 
     public void setStepDetail(int currentStep) {
        this.mCurrentStep = currentStep;
