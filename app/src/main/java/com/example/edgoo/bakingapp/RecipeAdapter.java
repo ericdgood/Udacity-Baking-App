@@ -24,6 +24,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
     private final Context mContext;
     public static ArrayList description;
     public static ArrayList videoUrl;
+    public static ArrayList thumbUrl;
     public static ArrayList shortDescrip;
     public static String recipeName;
     public static ArrayList step_id;
@@ -59,6 +60,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.ViewHolder
 
             description = (mRecipes[i].getDescription());
             videoUrl = (mRecipes[i].getVideoUrl());
+            thumbUrl = (mRecipes[i].getThumbUrl());
             recipeName = (mRecipes[i].getRecipeItemName());
             shortDescrip = (mRecipes[i].getShortDescription());
             step_id = (mRecipes[i].getStepId());

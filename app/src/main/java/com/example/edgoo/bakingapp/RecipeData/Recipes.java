@@ -158,4 +158,8 @@ public class Recipes implements Parcelable {
         this.thumbnilUrl = thumbnilUrl;
     }
 
+    public ArrayList getThumbUrl() {
+        return thumbnilUrl;
+    }
+
 }

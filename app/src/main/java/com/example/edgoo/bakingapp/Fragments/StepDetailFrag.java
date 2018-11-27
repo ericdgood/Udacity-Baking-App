@@ -83,21 +83,14 @@ public class StepDetailFrag extends Fragment {
 
                     stepDescription.setText((CharSequence) descriptionsArray.get(mCurrentStep));
 
-                    if (checkInternetConnection()) {
-                        noVideo.setVisibility(View.GONE);
-                            if ((mVideoUrl.get(mCurrentStep)) != null){
+                            if (!(mVideoUrl.get(mCurrentStep)).equals("")){
                                 videoPlayerView.setVisibility(View.VISIBLE);
                                 noVideo.setVisibility(View.GONE);
                                 // Set player
                                 initializePlayer(rootView.getContext(), mVideoUrl.get(mCurrentStep).toString());
                             }else{
-                                videoPlayerView.setVisibility(View.INVISIBLE);
                                 noVideo.setVisibility(View.VISIBLE);
                             }
-                    } else {
-                        videoPlayerView.setVisibility(View.INVISIBLE);
-                        noVideo.setVisibility(View.VISIBLE);
-                    }
             return rootView;
         }
 
@@ -133,19 +126,6 @@ public class StepDetailFrag extends Fragment {
             }
         }
 
-//        @Override
-//        public void onPause() {
-//            super.onPause();
-//            if(player != null){
-//                if(player.getPlayWhenReady()){
-//                    player.setPlayWhenReady(false);
-//                    playWhenReady = true;
-//                }else{
-//                    playWhenReady = false;
-//                }
-//            }
-//        }
-
         @Override
         public void onDestroyView() {
             super.onDestroyView();
@@ -160,15 +140,6 @@ public class StepDetailFrag extends Fragment {
                 player.release();
                 player = null;
             }
-        }
-
-        private boolean checkInternetConnection() {
-            ConnectivityManager connectivityManager = (ConnectivityManager) rootView.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo activeNetworkInfo = null;
-            if (connectivityManager != null) {
-                activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-            }
-            return activeNetworkInfo != null && activeNetworkInfo.isConnected();
         }
 
         @Override
@@ -192,6 +163,15 @@ public class StepDetailFrag extends Fragment {
         playWhenReady = player.getPlayWhenReady();
         playbackPosition = player.getCurrentPosition();
         player.release();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if (player!=null) {
+            player.stop();
+            player.release();
+        }
     }
 
     public void setStepDetail(int currentStep) {
