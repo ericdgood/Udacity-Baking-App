@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setAdapter(mRecipeAdapter);
 
             loadRecipeData();
-// Testing pr scheduler
+// Testing pr scheduler current banner updated
         }
     }
 
